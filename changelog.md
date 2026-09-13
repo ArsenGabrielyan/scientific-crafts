@@ -5,12 +5,13 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 ## 0.4.0 - Unreleased
-### Responsive UX Improvement
+### Made UX Responsive
 - Hero Section
 - About Section
 - Footer
 - Experiments page
 - Templates page
+- Single Experiment page
 ### Changed
 - Adjusted spacing in headers
 

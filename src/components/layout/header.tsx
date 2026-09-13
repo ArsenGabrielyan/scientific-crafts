@@ -35,7 +35,7 @@ export default function SiteHeader(){
           return "/logo-dark.png"
      }, [isOpened, isScrolled, currTheme, isHovered])
      return (
-          <header className={cn("transition-[background-color,padding,box-shadow,border-color] duration-300 fixed top-0 left-0 w-full z-40 flex justify-center items-center px-5 gap-4",isScrolled ? "bg-card/75 backdrop-blur-md text-card-foreground border-b shadow-md py-3.5" : "py-7", isOpened && "bg-card border-0")}>
+          <header className={cn("transition-[background-color,padding,box-shadow,border-color] duration-300 fixed top-0 left-0 w-full z-40 flex justify-center items-center px-5 gap-4 min-h-17.5",isScrolled ? "bg-card/75 backdrop-blur-md text-card-foreground border-b shadow-md py-3.5" : "py-7", isOpened && "bg-card border-0")}>
                <nav className="max-w-360 flex justify-between items-center w-full gap-4">
                     <Link href="/">
                          <Image src={logo} alt="logo" width={256} height={40} onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)} className="w-40 sm:w-56 md:w-64 h-auto"/>
