@@ -4,19 +4,22 @@ All notable changes to Scientific Crafts will be documented here.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## 0.3.0 - Unreleased
+## 0.3.0 - 2026-09-13
 ### Added
 - MDX support with LATEX plugin
 - MDX content example
 - MDX Helper functions
 - Experiments Support
 - Empty component for experiments as a fallback state
+- Blockquote variants
 ### Changed
 - Added working pagination and filtering on the experiments page
 - Split filters into two:
   - Templates filter
   - Experiments filter
 - Refactored and optimized the single experiment page
+### Improved
+- **Header** - Added responsive UX
 ### New Experiments
 - Elephant toothpaste
 

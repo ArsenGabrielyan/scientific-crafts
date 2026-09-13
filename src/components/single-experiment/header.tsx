@@ -4,6 +4,7 @@ import { SingleExperimentComponentProps } from "@/lib/types";
 import { Calendar, Clock, Edit, FlaskConical, ShieldAlert, ShieldCheck, TestTube, TestTubes } from "lucide-react";
 import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { EXPERIMENT_FILTER_NAMES } from "@/lib/constants/filters";
 
 export default function ExperimentHeader({experiment}: SingleExperimentComponentProps){
      return (
@@ -14,7 +15,7 @@ export default function ExperimentHeader({experiment}: SingleExperimentComponent
                     {experiment.categories.length !== 0 && (
                          <div className="flex items-center gap-2">
                               {experiment.categories.map(category=>(
-                                   <Badge key={category.toLowerCase()}>{category}</Badge>
+                                   <Badge key={category.toLowerCase()}>{EXPERIMENT_FILTER_NAMES[category]}</Badge>
                               ))}
                          </div>
                     )}

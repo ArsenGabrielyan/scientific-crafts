@@ -15,13 +15,13 @@ export interface Template {
      categories: TemplateFilterName[];
      pages: number;
 }
-// TODO: Translate blockquote variants initially into Armenian
 export type BlockquoteVariant = "note" | "tip" | "important" | "warning" | "caution"
 export interface IBlockquoteBox{
      boxClass: string,
      lineClass: string,
      Icon: LucideIcon,
-     iconClass: string
+     iconClass: string,
+     title: string
 }
 export interface ExperimentMetadata {
      title: string
