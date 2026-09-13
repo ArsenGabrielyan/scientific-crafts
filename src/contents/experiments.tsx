@@ -119,10 +119,10 @@ export default function ExperimentsMainContent({
      }
      return (
           <SiteLayout>
-               <section className="w-full min-h-[64dvh] flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background">
-                    <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360">
+               <section className="w-full min-h-[64dvh] flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background px-4">
+                    <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360 text-center md:text-left">
                          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold">Գիտական փորձեր</h1>
-                         <p className="text-lg text-muted-foreground">Այստեղ դուք կուսումնասիրեք լիքը գիտական փորձեր։</p>
+                         <p className="text-base md:text-lg text-muted-foreground">Այստեղ դուք կուսումնասիրեք լիքը գիտական փորձեր։</p>
                          <SearchField
                               placeholder="Որոնել"
                               value={input}
@@ -130,10 +130,11 @@ export default function ExperimentsMainContent({
                               onClearSearch={() => handleSearch("")}
                               groupClassName="bg-background/50"
                          />
-                         <div className="flex items-center gap-2">
+                         <div className="flex items-center gap-2 flex-wrap">
                               <Button
                                    variant={currFilter === "all" ? "default" : "outline"}
                                    onClick={() => handleFilter("all")}
+                                   className="flex-1"
                               >
                                    Բոլորը ({allCount})
                               </Button>
@@ -144,6 +145,7 @@ export default function ExperimentsMainContent({
                                              key={filter}
                                              variant={currFilter === filter ? "default" : "outline"}
                                              onClick={() => handleFilter(filter)}
+                                             className="flex-1"
                                         >
                                              {value} ({categoryCounts[filter]})
                                         </Button>
@@ -154,7 +156,7 @@ export default function ExperimentsMainContent({
                </section>
                <section className="w-full py-4 px-8 flex justify-center items-center flex-col gap-4 scroll-mt-10">
                     <div className="w-full max-w-360 space-y-4">
-                         <div className="flex items-center gap-2">
+                         <div className="flex items-center gap-2 flex-wrap">
                               <SelectorField
                                    placeholder="Բարդություն"
                                    value={difficulty}
@@ -163,6 +165,7 @@ export default function ExperimentsMainContent({
                                         value: key,
                                         label: val
                                    }))}
+                                   className="flex-1"
                               />
                               <SelectorField
                                    placeholder="Տևողություն"
@@ -172,6 +175,7 @@ export default function ExperimentsMainContent({
                                         value: key,
                                         label: val
                                    }))}
+                                   className="flex-1"
                               />
                               <div className="rounded-md shadow-xs border bg-background p-2 flex justify-between items-center flex-1 dark:bg-input/30 dark:hover:bg-input/50 border-input aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50">
                                    <div className="flex items-center gap-2">

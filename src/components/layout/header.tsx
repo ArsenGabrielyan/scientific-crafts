@@ -35,8 +35,8 @@ export default function SiteHeader(){
           return "/logo-dark.png"
      }, [isOpened, isScrolled, currTheme, isHovered])
      return (
-          <header className={cn("transition-[background-color,padding,box-shadow,border-color] duration-300 fixed top-0 left-0 w-full z-40 flex justify-center items-center px-7",isScrolled ? "bg-card/75 backdrop-blur-md text-card-foreground border-b shadow-md py-3.5" : "py-7", isOpened && "bg-card border-0")}>
-               <nav className="max-w-360 flex justify-between items-center w-full">
+          <header className={cn("transition-[background-color,padding,box-shadow,border-color] duration-300 fixed top-0 left-0 w-full z-40 flex justify-center items-center px-5 gap-4",isScrolled ? "bg-card/75 backdrop-blur-md text-card-foreground border-b shadow-md py-3.5" : "py-7", isOpened && "bg-card border-0")}>
+               <nav className="max-w-360 flex justify-between items-center w-full gap-4">
                     <Link href="/">
                          <Image src={logo} alt="logo" width={256} height={40} onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)} className="w-40 sm:w-56 md:w-64 h-auto"/>
                     </Link>
@@ -62,7 +62,7 @@ export default function SiteHeader(){
                     </div>
                </nav>
                {isOpened && (
-                    <ul className="md:hidden absolute top-full left-0 bg-card text-card-foreground border-b shadow-md pb-3.5 px-3.5 w-full" id="mobile-menu">
+                    <ul className="md:hidden absolute top-full left-0 bg-card text-card-foreground border-b shadow-md pb-4 px-2 w-full" id="mobile-menu">
                          {LINKS.map((link,i)=>(
                               <li key={`link-${i+1}`} className="flex gap-2 items-center">
                                    <Button variant="ghost" className="text-base gap-3" asChild>

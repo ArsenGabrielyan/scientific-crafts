@@ -6,7 +6,7 @@ export default function SiteFooter(){
      const year = new Date().getFullYear()
      return (
           <footer className="p-4 bg-primary/10 border-t shadow-md flex items-center justify-center">
-               <div className="w-full max-w-360 flex items-center justify-between gap-2">
+               <div className="w-full max-w-360 flex flex-col sm:flex-row items-center justify-between gap-2 text-center md:text-left">
                     <p>&copy; {year} | Բոլոր Իրավունքները պաշտպանված են</p>
                     <div className="flex items-center gap-2">
                          <Button variant="ghost" size="icon-lg" title="Դիտել մեզ YouTube-ում" asChild>
