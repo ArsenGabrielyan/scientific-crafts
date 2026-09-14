@@ -4,7 +4,7 @@ All notable changes to Scientific Crafts will be documented here.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## 1.0.0 - Unreleased
+## 1.0.0 - 2026-09-14
 ### Added
 - OpenGraph and Twitter images
 - Keywords
@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - `robots.txt`
 - `manifest.json`
 - Title, description, canonical URL, and other metadata across every page
+- Dynamic OpenGraph Image on Experiments
 ### Made UX Responsive
 - Hero Section
 - About Section

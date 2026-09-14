@@ -4,7 +4,9 @@ export { cn } from "cn"
 
 export const absoluteURL = (path?: string) => {
      const url = process.env.NODE_ENV==="production" ? "https://gitafizika.vercel.app" : "http://localhost:3000";
-     return !path ? url : `${url}${path}`
+     if(!path) return url;
+     if(path.trim()==="") return url;
+     return `${url}${path}`
 }
 
 export function createMetaAlternates(url?: string): Metadata["alternates"] {
