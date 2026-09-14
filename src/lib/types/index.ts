@@ -26,3 +26,4 @@ export interface IBlockquoteBox{
      iconClass: string,
      title: string
 }
+export type SearchPageMode = "search-template" | "search-page"

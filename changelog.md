@@ -4,10 +4,11 @@ All notable changes to Scientific Crafts will be documented here.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## 0.4.0 - Unreleased
+## 1.0.0 - Unreleased
 ### Added
 - OpenGraph and Twitter images
 - Keywords
+- Dynamic search templates for long tail keyword support
 ### Made UX Responsive
 - Hero Section
 - About Section

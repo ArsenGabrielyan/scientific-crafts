@@ -5,14 +5,19 @@ import SiteLayout from "@/components/layout";
 import ExperimentsList from "@/components/lists/experiments";
 import PaginationWithLinks from "@/components/pagination-with-links";
 import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
 import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
+import { SearchSchema } from "@/lib/schemas";
+import { SearchPageMode, SearchType } from "@/lib/types";
 import type { ExperimentMetadata } from "@/lib/types/experiment";
-import { ShieldCheck } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Search, ShieldCheck } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
 interface ExperimentsMainContentProps {
      initialQuery?: string
@@ -25,7 +30,8 @@ interface ExperimentsMainContentProps {
      currPage: number
      categoryCounts: Record<ExperimentFilterName, number>
      totalResults: number
-     allCount: number
+     allCount: number,
+     mode?: SearchPageMode
 }
 export default function ExperimentsMainContent({
      experiments,
@@ -38,7 +44,8 @@ export default function ExperimentsMainContent({
      initialCategory,
      initialDifficulty,
      initialDuration,
-     initialSelfGuided
+     initialSelfGuided,
+     mode="search-page"
 }: ExperimentsMainContentProps){
      const router = useRouter()
      const pathname = usePathname()
@@ -47,6 +54,13 @@ export default function ExperimentsMainContent({
      const [difficulty, setDifficulty] = useState(initialDifficulty)
      const [duration, setDuration] = useState(initialDuration)
      const [selfGuided, setSelfGuided] = useState(initialSelfGuided ?? false)
+     const form = useForm<SearchType>({
+          resolver: zodResolver(SearchSchema),
+          defaultValues: {
+               query: initialQuery || ""
+          },
+          mode: "onChange"
+     })
      function handleSearch(value: string) {
           setInput(value)
           const params = new URLSearchParams(window.location.search)
@@ -117,19 +131,48 @@ export default function ExperimentsMainContent({
                scroll: false
           })
      }
+     const onSubmit = ({query}: SearchType) => {
+          const params = new URLSearchParams({ query });
+          router.push(`/experiments?${params.toString()}`);
+     }
      return (
           <SiteLayout>
                <section className="w-full min-h-[64dvh] flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background px-4">
                     <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360 text-center md:text-left">
                          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold">Գիտական փորձեր</h1>
-                         <p className="text-base md:text-lg text-muted-foreground">Այստեղ դուք կուսումնասիրեք լիքը գիտական փորձեր։</p>
-                         <SearchField
-                              placeholder="Որոնել"
-                              value={input}
-                              onChange={e => handleSearch(e.target.value)}
-                              onClearSearch={() => handleSearch("")}
-                              groupClassName="bg-background/50"
-                         />
+                         <p className="text-base md:text-lg text-muted-foreground">
+                              {mode==="search-page" ? "Այստեղ դուք կուսումնասիրեք լիքը գիտական փորձեր։" : `«${initialQuery}» պիտակով նշված լավագույն ${totalResults} գիտական փորձեր`}
+                         </p>
+                         {mode==="search-template" ? (
+                              <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+                                   <ButtonGroup className="w-full">
+                                        <Controller
+                                             control={form.control}
+                                             name="query"
+                                             render={({field})=>(
+                                                  <SearchField
+                                                       {...field}
+                                                       placeholder="Որոնել գիտական փորձեր..."
+                                                       onClearSearch={()=>form.reset()}
+                                                       groupClassName="bg-background/50"
+                                                  />
+                                             )}
+                                        />
+                                        <Button type="submit" disabled={!form.formState.isValid || form.formState.isSubmitting}>
+                                             <Search />
+                                             Որոնել
+                                        </Button>
+                                   </ButtonGroup>
+                              </form>
+                         ) : (
+                              <SearchField
+                                   placeholder="Որոնել"
+                                   value={input}
+                                   onChange={e => handleSearch(e.target.value)}
+                                   onClearSearch={() => handleSearch("")}
+                                   groupClassName="bg-background/50"
+                              />
+                         )}
                          <div className="flex items-center gap-2 flex-wrap">
                               <Button
                                    variant={currFilter === "all" ? "default" : "outline"}
