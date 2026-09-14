@@ -12,7 +12,7 @@ interface SingleExperimentPageProps{
 export const revalidate = 86400
 
 export const generateStaticParams = async() => {
-  const allSlugs = await getAllSlugs();
+  const allSlugs = await getAllSlugs(20);
   return allSlugs.map(slug => ({slug}))
 }
 

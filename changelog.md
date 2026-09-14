@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Sitemap
 - `robots.txt`
 - `manifest.json`
+- Title, description, canonical URL, and other metadata across every page
 ### Made UX Responsive
 - Hero Section
 - About Section
@@ -22,6 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 - Adjusted spacing in headers
 - Reorganized types and updated imports
+- Cached some functions and pages for SEO optimization
 
 ## 0.3.0 - 2026-09-13
 ### Added

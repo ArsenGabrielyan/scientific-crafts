@@ -3,14 +3,9 @@ import ExperimentsMainContent from "../../contents/experiments"
 import { getAllExperiments } from "@/lib/helpers/experiments";
 import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
 import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
+import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 
-export const metadata: Metadata = {
-     title: "Գիտական փորձեր"
-}
-
-export const revalidate = 3600;
-
-export default async function ExperimentsMainPage({ searchParams }: {
+interface PageProps {
      searchParams: Promise<{
           page?: string;
           pageSize?: string;
@@ -20,7 +15,33 @@ export default async function ExperimentsMainPage({ searchParams }: {
           duration?: keyof typeof DURATIONS
           selfGuided?: string
      }>;
-}){
+}
+
+export const generateMetadata = async({ searchParams }: PageProps): Promise<Metadata> => {
+     const search = await searchParams
+     const result = await getAllExperiments();
+     const allowedPageSizes = [4,8,16,24,32,48];
+     const requestedPageSize = Number(search.pageSize);
+     const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
+     const query = search.query?.trim().toLowerCase() ?? ""
+     const searchResults = result.filter(item =>!query || item.title.includes(query))
+     const totalResults = searchResults.length
+     const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
+     const currPage = Math.min(Math.max(Number(search.page) || 1, 1),totalPages)
+     return {
+          title: "Գիտական փորձեր",
+          description: "Այստեղ դուք կուսումնասիրեք և կկատարեք լիքը գիտական փորձեր։",
+          pagination: {
+               previous: currPage > 1 ? absoluteURL(`/experiments?page=${currPage - 1}`) : undefined,
+               next: currPage < totalPages ? absoluteURL(`/experiments?page=${currPage + 1}`) : undefined
+          },
+          alternates: createMetaAlternates("/experiments")
+     }
+}
+
+export const revalidate = 86400;
+
+export default async function ExperimentsMainPage({ searchParams }: PageProps){
      const params = await searchParams;
      const result = await getAllExperiments();
      const allowedPageSizes = [4,8,16,24,32,48];

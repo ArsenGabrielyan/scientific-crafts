@@ -68,7 +68,7 @@ export default function TemplatesMainContent({
                               Շաբլոններ
                          </h1>
                          <p className="text-base md:text-lg text-muted-foreground">
-                              Հատուկ շաբլոններ՝ փորձեր անելու համար
+                              Հատուկ շաբլոններ՝ գիտափորձեր կատարելու համար
                          </p>
                          <SearchField
                               placeholder="Որոնել"

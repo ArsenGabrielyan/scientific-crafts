@@ -141,7 +141,7 @@ export default function ExperimentsMainContent({
                     <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360 text-center md:text-left">
                          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold">Գիտական փորձեր</h1>
                          <p className="text-base md:text-lg text-muted-foreground">
-                              {mode==="search-page" ? "Այստեղ դուք կուսումնասիրեք լիքը գիտական փորձեր։" : `«${initialQuery}» պիտակով նշված լավագույն ${totalResults} գիտական փորձեր`}
+                              {mode==="search-page" ? "Այստեղ դուք կուսումնասիրեք և կկատարեք լիքը գիտական փորձեր։" : `«${initialQuery}» պիտակով նշված լավագույն ${totalResults} գիտական փորձեր`}
                          </p>
                          {mode==="search-template" ? (
                               <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">

@@ -1,7 +1,7 @@
 import ExperimentsMainContent from "@/contents/experiments";
 import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
 import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
-import { getAllExperiments } from "@/lib/helpers/experiments";
+import { getAllExperiments, getAllTags } from "@/lib/helpers/experiments";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 import { Metadata } from "next";
 
@@ -16,11 +16,19 @@ interface ExperimentSearchProps{
           selfGuided?: string
      }>;
 }
+export const generateStaticParams = async() => {
+     const allTags = await getAllTags(10);
+     return allTags.map(query=>({query}))
+}
+export const revalidate = 86400
+
 export async function generateMetadata({params, searchParams}: ExperimentSearchProps): Promise<Metadata>{
      const {query} = await params;
      const search = await searchParams
      const result = await getAllExperiments();
-     const pageSize = Number(search.pageSize)
+     const allowedPageSizes = [4,8,16,24,32,48];
+     const requestedPageSize = Number(search.pageSize);
+     const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
      const queryDecoded = decodeURIComponent(query).trim().toLowerCase() ?? ""
      const searchResults = result.filter(item =>!queryDecoded || item.tags.includes(queryDecoded))
      const totalResults = searchResults.length
