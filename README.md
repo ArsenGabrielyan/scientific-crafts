@@ -56,6 +56,19 @@ The project began in 2018 as a video series of science experiments, and is now e
 - [![Vercel][vercel-shield]][vercel-url]
 - [![React][react-shield]][react-url]
 
+### Planned Improvements
+- [ ] I18N Support
+- [ ] New Experiments
+  - [ ] [How to make a rainbow](https://www.youtube.com/watch?v=GjIlFExanUE)
+  - [ ] [Flower is blooming](https://www.youtube.com/watch?v=6uIAXaOGh98)
+  - [ ] [The Balloon gets darker](https://www.youtube.com/watch?v=4wcaKpPxg2g)
+  - [ ] [Coke & Mentos Experiment](https://www.youtube.com/watch?v=z3slpR1qfu4)
+  - [ ] [Coin Drop](https://www.youtube.com/watch?v=PI4pAMmqqWk)
+  - [ ] [The M&M's art](https://www.youtube.com/watch?v=k_76AexC0p8)
+  - [ ] [Lava Lamp](https://www.youtube.com/watch?v=a3S6qKryi0E)
+  - [ ] [Experiment with water and pencil](https://www.youtube.com/watch?v=dlcrlUdsBFA)
+  - [ ] [Balloon-powered car](https://www.youtube.com/watch?v=bmV0Hj4S0L8)
+
 ## Versioning
 This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog][changelog-url] for details on each website version.
 
