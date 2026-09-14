@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function AboutSection(){
      return (
-          <section className="w-full min-h-[50dvh] py-4 px-8 flex justify-center items-center scroll-mt-5" id="about">
+          <section className="w-full min-h-[50dvh] pb-4 pt-0 md:pt-4 px-8 flex justify-center items-center scroll-mt-5" id="about">
                <div className="w-full max-w-360 flex flex-col md:flex-row gap-8 justify-between items-center">
                     <div className="flex-1">
                          <Image src="/app-icon.png" alt="Scientific Crafts" width={256} height={256} className="object-contain rounded-lg"/>
