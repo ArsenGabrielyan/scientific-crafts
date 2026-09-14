@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { PlayCircle } from "lucide-react";
+import { PlayCircle, RssIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,6 +18,11 @@ export default function HeroSection(){
                               <Link href="https://youtube.com/playlist?list=PLSI6KSDJfq-J6OxBprsyMjWmmLym2o7T3" target="_blank" rel="noopener noreferrer nofollow">
                                    <PlayCircle/>
                                    Դիտել Փլեյլիստը
+                              </Link>
+                         </Button>
+                         <Button variant="outline" size="icon" title="Հետևիր մեզ" asChild>
+                              <Link href="/rss.xml" target="_blank" rel="noopener nofollow noreferrer">
+                                   <RssIcon/>
                               </Link>
                          </Button>
                     </div>

@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
           rules: [
                {
                     userAgent: "*",
-                    allow: ["/", "/api/og/*"],
+                    allow: ["/", "/api/og/*", "/rss.xml", "/rss.json", "/atom.xml"],
                },
           ],
           sitemap: absoluteURL("/sitemap.xml"),

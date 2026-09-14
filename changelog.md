@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - `manifest.json`
 - Title, description, canonical URL, and other metadata across every page
 - Dynamic OpenGraph Image on Experiments
+- RSS support
 ### Made UX Responsive
 - Hero Section
 - About Section
