@@ -1,10 +1,16 @@
-import Logo from "@/components/logo";
+import MainContent from "@/contents/main";
+import { getAllExperiments } from "@/lib/helpers/experiments";
+import { getTemplatesFromCDN } from "@/lib/helpers/templates";
 
-export default function Home() {
+export const revalidate = 86400;
+
+export default async function Home() {
+  const templates = await getTemplatesFromCDN()
+  const experiments = await getAllExperiments()
   return (
-    <div className="flex items-center justify-center flex-col gap-2 w-full h-dvh">
-      <Logo/>
-      <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold text-primary">Շուտով</h1>
-    </div>
+    <MainContent
+      templates={templates}
+      experiments={experiments.slice(0,8)}
+    />
   );
 }

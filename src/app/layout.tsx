@@ -1,7 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
+import "katex/dist/katex.min.css"
 import { absoluteURL, cn, createMetaAlternates } from "@/lib/utils";
+import { ThemeProvider } from "@/components/themes/provider";
+import { KEYWORDS } from "@/lib/constants";
 
 const geistHeading = Geist({subsets:['latin'],variable:'--font-heading'});
 
@@ -37,16 +40,52 @@ export const metadata: Metadata = {
     ],
     apple: "/app-icon.png"
   },
-  // TODO: Add Keywords, OpenGraph, and Twitter images
+  keywords: KEYWORDS,
+  openGraph: {
+    title: "Գիտաֆիզիկա - Գիտություն, Ֆիզիկա, Քիմիա, և ոչ միայն։",
+    description: "Իմացեք գիտության, ֆիզիկայի, քիմիայի և ԳՏՃՄ-ի մասին (գիտություն, տեխնոլոգիա, ճարտարագիտություն, մաթեմատիկա) փորձելով լիքը գիտական փորձեր",
+    url: absoluteURL(),
+    siteName: "Գիտաֆիզիկա",
+    type: "website",
+    images: {
+      url: absoluteURL("/og-image.png"),
+      width: 1200,
+      height: 630
+    }
+  },
+   twitter: {
+    title: "Գիտաֆիզիկա - Գիտություն, Ֆիզիկա, Քիմիա, և ոչ միայն։",
+    description: "Իմացեք գիտության, ֆիզիկայի, քիմիայի և ԳՏՃՄ-ի մասին (գիտություն, տեխնոլոգիա, ճարտարագիտություն, մաթեմատիկա) փորձելով լիքը գիտական փորձեր",
+    card: "summary_large_image",
+    images: [{
+      url: absoluteURL("/og-image.png"),
+      width: 1200,
+      height: 630
+    }]
+  },
 };
+
+export const viewport: Viewport = {
+  themeColor: "#0069a8"
+}
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
+      suppressHydrationWarning
       lang="hy"
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable, geistHeading.variable)}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
