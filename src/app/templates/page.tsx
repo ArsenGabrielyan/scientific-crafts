@@ -24,7 +24,7 @@ export default async function TemplatesMainPage({ searchParams }: {
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
      const category = params.category && Object.hasOwn(TEMPLATE_FILTER_NAMES, params.category) ? params.category as TemplateFilterName : undefined
      const query = params.query?.trim().toLowerCase() ?? ""
-     const searchResults = result.data.filter(item =>!query || item.title.toLowerCase().includes(query))
+     const searchResults = result.filter(item =>!query || item.title.toLowerCase().includes(query))
      const filteredTemplates = searchResults.filter(item =>!category || item.categories.includes(category))
      const categoryCounts = Object.fromEntries(
           Object.keys(TEMPLATE_FILTER_NAMES).map(key => {
@@ -45,7 +45,6 @@ export default async function TemplatesMainPage({ searchParams }: {
                templates={templates}
                pageSize={pageSize}
                currPage={currPage}
-               error={result.error}
                categoryCounts={categoryCounts}
                totalResults={totalResults}
                allCount={searchResults.length}

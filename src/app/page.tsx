@@ -9,8 +9,7 @@ export default async function Home() {
   const experiments = await getAllExperiments()
   return (
     <MainContent
-      templates={templates.data}
-      error={templates.error}
+      templates={templates}
       experiments={experiments.slice(0,8)}
     />
   );

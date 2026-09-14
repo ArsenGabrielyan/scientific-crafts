@@ -46,7 +46,7 @@ export const getExperimentBySlug = cache(async(slug: string): Promise<Experiment
                slug: frontmatter.slug ?? slug,
           };
      } catch (e) {
-          console.error(`Failed to load experiment: ${slug}`);
+          console.error(`Չստացվեց բեռնել ${slug} գիտափորձը`);
           console.error(e);
           return null;
      }
@@ -61,27 +61,11 @@ export const getRelatedExperiments = cache(async(currentSlug: string, tags: stri
           return true;
      }).slice(0, MAX_RELATED_EXPERIMENTS);
 })
-export const getCategories = cache(async(experiments?: ReadonlyArray<ExperimentMetadata>): Promise<string[]> => {
-     const arr = !experiments ? await getAllExperiments() : experiments
-     return [...new Set(arr.flatMap(experiment => experiment.categories))];
-})
 export const getAllTags = cache(async(limit?: number) => {
      const experiments = await getAllExperiments();
      return [...new Set(experiments.flatMap(experiment => experiment.tags))].slice(0, limit);
-});
-export const getExperimentsByTag = cache(async(tag: string) => {
-     const experiments = await getAllExperiments();
-     return experiments.filter(experiment =>experiment.tags.some(t => t.toLowerCase().includes(tag.toLowerCase())));
 });
 export const getAllSlugs = cache(async(limit?: number) => {
      const experiments = await getAllExperiments()
      return experiments.map(experiment=>experiment.slug).slice(0,limit)
 })
-export const getAllCategories = cache(async(limit?: number) => {
-     const experiments = await getAllExperiments();
-     return [...new Set(experiments.flatMap(experiment => experiment.categories))].slice(0, limit);
-})
-export const getExperimentsByCategory = cache(async(category: string) => {
-     const experiments = await getAllExperiments();
-     return experiments.filter(experiment =>experiment.categories.some(cat => cat.toLowerCase() === category.toLowerCase()));
-});

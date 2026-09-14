@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - OpenGraph and Twitter images
 - Keywords
 - Dynamic search templates for long tail keyword support
+- Sitemap
+- `robots.txt`
+- `manifest.json`
 ### Made UX Responsive
 - Hero Section
 - About Section

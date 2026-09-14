@@ -22,7 +22,7 @@ export async function generateMetadata({params, searchParams}: ExperimentSearchP
      const result = await getAllExperiments();
      const pageSize = Number(search.pageSize)
      const queryDecoded = decodeURIComponent(query).trim().toLowerCase() ?? ""
-     const searchResults = result.filter(item =>!queryDecoded || item.title.toLowerCase().includes(queryDecoded))
+     const searchResults = result.filter(item =>!queryDecoded || item.tags.includes(queryDecoded))
      const totalResults = searchResults.length
      const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
      const currPage = Math.min(Math.max(Number(search.page) || 1, 1),totalPages)
@@ -45,7 +45,7 @@ export default async function ExperimentSearch({searchParams, params}: Experimen
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
      const category = search.category && Object.hasOwn(EXPERIMENT_FILTER_NAMES, search.category) ? search.category as ExperimentFilterName : undefined
      const queryDecoded = decodeURIComponent(query).trim().toLowerCase() ?? ""
-     const searchResults = result.filter(item =>!queryDecoded || item.title.toLowerCase().includes(queryDecoded))
+     const searchResults = result.filter(item =>!queryDecoded || item.tags.includes(queryDecoded))
      const filteredExperiments = searchResults.filter(item =>
           (!search.category || item.categories.includes(search.category)) &&
           (!search.difficulty || item.difficulty === search.difficulty) &&
