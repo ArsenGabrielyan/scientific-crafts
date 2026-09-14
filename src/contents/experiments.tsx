@@ -49,8 +49,8 @@ export default function ExperimentsMainContent({
 }: ExperimentsMainContentProps){
      const router = useRouter()
      const pathname = usePathname()
-     const [input, setInput] = useState(initialQuery ?? "")
-     const [currFilter, setCurrFilter] = useState<"all" | ExperimentFilterName>(initialCategory ?? "all")
+     const [input, setInput] = useState(initialQuery || "")
+     const [currFilter, setCurrFilter] = useState<"all" | ExperimentFilterName>(initialCategory || "all")
      const [difficulty, setDifficulty] = useState(initialDifficulty)
      const [duration, setDuration] = useState(initialDuration)
      const [selfGuided, setSelfGuided] = useState(initialSelfGuided ?? false)
