@@ -39,7 +39,29 @@ export const metadata: Metadata = {
     ],
     apple: "/app-icon.png"
   },
-  // TODO: Add Keywords, OpenGraph, and Twitter images
+  openGraph: {
+    title: "Գիտաֆիզիկա - Գիտություն, Ֆիզիկա, Քիմիա, և ոչ միայն։",
+    description: "Իմացեք գիտության, ֆիզիկայի, քիմիայի և ԳՏՃՄ-ի մասին (գիտություն, տեխնոլոգիա, ճարտարագիտություն, մաթեմատիկա) փորձելով լիքը գիտական փորձեր",
+    url: absoluteURL(),
+    siteName: "Գիտաֆիզիկա",
+    type: "website",
+    images: {
+      url: absoluteURL("/og-image.png"),
+      width: 1200,
+      height: 630
+    }
+  },
+   twitter: {
+    title: "Գիտաֆիզիկա - Գիտություն, Ֆիզիկա, Քիմիա, և ոչ միայն։",
+    description: "Իմացեք գիտության, ֆիզիկայի, քիմիայի և ԳՏՃՄ-ի մասին (գիտություն, տեխնոլոգիա, ճարտարագիտություն, մաթեմատիկա) փորձելով լիքը գիտական փորձեր",
+    card: "summary_large_image",
+    images: [{
+      url: absoluteURL("/og-image.png"),
+      width: 1200,
+      height: 630
+    }]
+  },
+  // TODO: Add Keywords
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
