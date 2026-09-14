@@ -6,7 +6,8 @@ import HeroSection from "@/section/hero";
 import TemplatesSection from "@/section/templates";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import { ExperimentMetadata, Template } from "@/lib/types";
+import type { Template } from "@/lib/types";
+import type { ExperimentMetadata } from "@/lib/types/experiment";
 
 interface MainContentProps{
      templates: Template[],

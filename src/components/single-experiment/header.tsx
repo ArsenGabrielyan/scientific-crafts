@@ -1,6 +1,6 @@
 "use client"
 import { Badge } from "@/components/ui/badge";
-import { SingleExperimentComponentProps } from "@/lib/types";
+import type { SingleExperimentComponentProps } from "@/lib/types/experiment";
 import { Calendar, Clock, Edit, FlaskConical, ShieldAlert, ShieldCheck, TestTube, TestTubes } from "lucide-react";
 import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"

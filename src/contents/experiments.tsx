@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
 import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
-import { ExperimentMetadata } from "@/lib/types";
+import type { ExperimentMetadata } from "@/lib/types/experiment";
 import { ShieldCheck } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";

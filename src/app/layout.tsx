@@ -4,6 +4,7 @@ import "./globals.css";
 import "katex/dist/katex.min.css"
 import { absoluteURL, cn, createMetaAlternates } from "@/lib/utils";
 import { ThemeProvider } from "@/components/themes/provider";
+import { KEYWORDS } from "@/lib/constants";
 
 const geistHeading = Geist({subsets:['latin'],variable:'--font-heading'});
 
@@ -39,6 +40,7 @@ export const metadata: Metadata = {
     ],
     apple: "/app-icon.png"
   },
+  keywords: KEYWORDS,
   openGraph: {
     title: "Գիտաֆիզիկա - Գիտություն, Ֆիզիկա, Քիմիա, և ոչ միայն։",
     description: "Իմացեք գիտության, ֆիզիկայի, քիմիայի և ԳՏՃՄ-ի մասին (գիտություն, տեխնոլոգիա, ճարտարագիտություն, մաթեմատիկա) փորձելով լիքը գիտական փորձեր",
@@ -61,7 +63,6 @@ export const metadata: Metadata = {
       height: 630
     }]
   },
-  // TODO: Add Keywords
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

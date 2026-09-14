@@ -1,4 +1,4 @@
-import { Template } from "../types";
+import type { Template } from "@/lib/types";
 import { absoluteCDN, getErrorMessage } from "../utils"
 
 export const getTemplatesFromCDN = async (): Promise<{

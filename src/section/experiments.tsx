@@ -1,6 +1,6 @@
 import ExperimentsList from "@/components/lists/experiments";
 import { Button } from "@/components/ui/button";
-import { ExperimentMetadata } from "@/lib/types";
+import type { ExperimentMetadata } from "@/lib/types/experiment";
 import Link from "next/link";
 
 interface ExperimentsSectionProps{

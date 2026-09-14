@@ -1,4 +1,4 @@
-import { BlockquoteVariant, IBlockquoteBox } from "@/lib/types";
+import type { BlockquoteVariant, IBlockquoteBox } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import React from "react";
 import {Info, Lightbulb, CircleAlert, TriangleAlert, ShieldAlert} from "lucide-react"

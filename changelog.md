@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 ## 0.4.0 - Unreleased
+### Added
+- OpenGraph and Twitter images
+- Keywords
 ### Made UX Responsive
 - Hero Section
 - About Section
@@ -14,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Single Experiment page
 ### Changed
 - Adjusted spacing in headers
+- Reorganized types and updated imports
 
 ## 0.3.0 - 2026-09-13
 ### Added

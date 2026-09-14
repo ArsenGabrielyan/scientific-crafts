@@ -2,7 +2,7 @@ import matter from "gray-matter"
 import {promises as fs} from "fs";
 import path from "path";
 import { cache } from "react";
-import { Experiment, ExperimentMetadata } from "../types";
+import type { Experiment, ExperimentMetadata } from "@/lib/types/experiment";
 
 const MAX_RELATED_EXPERIMENTS = 4
 const experimentsFolder = path.join(process.cwd(), "src", "experiments");

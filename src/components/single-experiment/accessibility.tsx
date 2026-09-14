@@ -1,7 +1,7 @@
 "use client"
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import { SingleExperimentComponentProps } from "@/lib/types";
+import type { SingleExperimentComponentProps } from "@/lib/types/experiment";
 import { absoluteURL, getErrorMessage } from "@/lib/utils";
 import { Share2 } from "lucide-react";
 import { toast } from "sonner";

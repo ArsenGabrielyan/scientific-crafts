@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { Card, CardHeader, CardAction, CardTitle, CardFooter } from "../ui/card";
-import { Template } from "@/lib/types";
+import type { Template } from "@/lib/types";
 import { absoluteCDN } from "@/lib/utils";
 import Link from "next/link";
 import { Download } from "lucide-react";

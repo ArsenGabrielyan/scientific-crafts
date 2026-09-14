@@ -6,7 +6,7 @@ import { ButtonGroup } from "./ui/button-group";
 import { useRouter } from "next/navigation";
 import SearchField from "./fields/search";
 import { SearchSchema } from "@/lib/schemas";
-import { SearchType } from "@/lib/types/schemas";
+import type { SearchType } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 

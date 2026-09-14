@@ -1,4 +1,4 @@
-import { ExperimentMetadata } from "@/lib/types";
+import type { ExperimentMetadata } from "@/lib/types/experiment";
 import ExperimentCard from "../cards/experiment";
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "../ui/empty";
 import { FlaskConical } from "lucide-react";

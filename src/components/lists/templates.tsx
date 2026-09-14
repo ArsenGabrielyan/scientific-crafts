@@ -1,4 +1,4 @@
-import { Template } from "@/lib/types";
+import type { Template } from "@/lib/types";
 import TemplateCard from "../cards/template";
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "../ui/empty";
 import { Scissors } from "lucide-react";

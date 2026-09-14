@@ -1,5 +1,6 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import SingleExperimentContent from "@/contents/single-experiment";
+import { KEYWORDS } from "@/lib/constants";
 import { getAllSlugs, getExperimentBySlug, getRelatedExperiments } from "@/lib/helpers/experiments";
 import { createMetaAlternates } from "@/lib/utils";
 import { Metadata } from "next";
@@ -22,7 +23,7 @@ export const generateMetadata = async({params}:SingleExperimentPageProps): Promi
      return {
           title: currExperiment.title,
           description: currExperiment.description,
-          keywords: currExperiment.tags,
+          keywords: [...currExperiment.tags, ...KEYWORDS],
           authors: [
                {
                     name: "Arsen G.",

@@ -1,7 +1,7 @@
 import SiteLayout from "@/components/layout";
 import ExperimentsList from "@/components/lists/experiments";
 import { Badge } from "@/components/ui/badge";
-import { Experiment, ExperimentMetadata } from "@/lib/types";
+import type { Experiment, ExperimentMetadata } from "@/lib/types/experiment";
 import MDXContent from "@/section/mdx-content";
 import ExperimentHeader from "@/components/single-experiment/header";
 import ExperimentSideInfo from "@/components/single-experiment/side-info";

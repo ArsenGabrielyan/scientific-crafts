@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { Card, CardHeader, CardAction, CardTitle, CardDescription, CardFooter } from "../ui/card";
-import { ExperimentMetadata } from "@/lib/types";
+import type { ExperimentMetadata } from "@/lib/types/experiment";
 import Link from "next/link";
 import { EXPERIMENT_FILTER_NAMES } from "@/lib/constants/filters";
 
