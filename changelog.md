@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 ## 1.0.1 - Unreleased
+### Added
+- Ellipsis logic onto the experiments card (Line Clamp)
 ### Changed
 - Swapped Tags and related experiments placed
 ### Fixed
@@ -14,6 +16,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### New Experiments
 - Paper Towel Rainbow
 - Blooming Paper Flower
+- Fireproof balloon
+- Coke and Mentos Experiment
+- Coin Drop
 
 ## 1.0.0 - 2026-09-14
 ### Added

@@ -24,7 +24,7 @@ export default function ExperimentCard({data}: ExperimentCardProps){
                          <Badge variant="secondary">{EXPERIMENT_FILTER_NAMES[data.categories[0]]}</Badge>
                     </CardAction>
                     <CardTitle>{data.title}</CardTitle>
-                    <CardDescription>{data.description}</CardDescription>
+                    <CardDescription className="line-clamp-4">{data.description}</CardDescription>
                </CardHeader>
                <CardFooter>
                     <Button className="w-full" asChild>
