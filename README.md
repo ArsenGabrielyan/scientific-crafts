@@ -59,6 +59,8 @@ The project began in 2018 as a video series of science experiments, and is now e
 ### Planned Improvements
 - [ ] I18N Support
 - [ ] Sort by date (Newest / Oldest)
+  - Experiments page
+  - Templates page
 
 ## Versioning
 This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog][changelog-url] for details on each website version.
