@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function ExperimentSideInfo({experiment}: SingleExperimentComponentProps){
      return (
-          <div className="space-y-4 relative md:sticky mb-3 lg:mb-0 top-0 lg:top-21.25 h-fit">
+          <div className="space-y-4 relative lg:sticky mb-3 lg:mb-0 top-0 lg:top-21.25 h-fit">
                {experiment.requirements.length !== 0 && (
                     <>
                          <h2 className="text-xl md:text-2xl lg:text-[27px] font-semibold border-b border-primary pb-1 mb-4 w-fit">Ձեզ անհրաժեշտ են</h2>
