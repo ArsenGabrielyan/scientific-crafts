@@ -59,16 +59,6 @@ The project began in 2018 as a video series of science experiments, and is now e
 ### Planned Improvements
 - [ ] I18N Support
 - [ ] Sort by date (Newest / Oldest)
-- [X] New Experiments
-  - [X] How to make a rainbow
-  - [X] Flower is blooming
-  - [X] The Balloon gets darker
-  - [X] Coke & Mentos Experiment
-  - [X] Coin Drop
-  - [X] The M&M's art
-  - [X] Lava Lamp
-  - [X] Experiment with water and pencil
-  - [X] Balloon-powered car
 
 ## Versioning
 This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog][changelog-url] for details on each website version.
