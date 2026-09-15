@@ -59,8 +59,8 @@ The project began in 2018 as a video series of science experiments, and is now e
 ### Planned Improvements
 - [ ] I18N Support
 - [ ] New Experiments
-  - [X] [How to make a rainbow](https://www.youtube.com/watch?v=GjIlFExanUE)
-  - [ ] [Flower is blooming](https://www.youtube.com/watch?v=6uIAXaOGh98)
+  - [X] How to make a rainbow
+  - [X] Flower is blooming
   - [ ] [The Balloon gets darker](https://www.youtube.com/watch?v=4wcaKpPxg2g)
   - [ ] [Coke & Mentos Experiment](https://www.youtube.com/watch?v=z3slpR1qfu4)
   - [ ] [Coin Drop](https://www.youtube.com/watch?v=PI4pAMmqqWk)
