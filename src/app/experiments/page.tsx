@@ -18,8 +18,10 @@ interface PageProps {
 }
 
 export const generateMetadata = async({ searchParams }: PageProps): Promise<Metadata> => {
-     const search = await searchParams
-     const result = await getAllExperiments();
+     const [search, result] = await Promise.all([
+          searchParams,
+          getAllExperiments()
+     ]);
      const allowedPageSizes = [4,8,16,24,32,48];
      const requestedPageSize = Number(search.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
@@ -42,8 +44,10 @@ export const generateMetadata = async({ searchParams }: PageProps): Promise<Meta
 export const revalidate = 86400;
 
 export default async function ExperimentsMainPage({ searchParams }: PageProps){
-     const params = await searchParams;
-     const result = await getAllExperiments();
+     const [params, result] = await Promise.all([
+          searchParams,
+          getAllExperiments()
+     ]);
      const allowedPageSizes = [4,8,16,24,32,48];
      const requestedPageSize = Number(params.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;

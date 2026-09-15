@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import TemplatesMainContent from "../../contents/templates";
-import { getTemplatesFromCDN } from "@/lib/helpers/templates";
+import { getAllTemplates } from "@/lib/helpers/templates";
 import { TEMPLATE_FILTER_NAMES, TemplateFilterName } from "@/lib/constants/filters";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 
@@ -14,8 +14,10 @@ interface PageProps {
 }
 
 export const generateMetadata = async({searchParams}: PageProps): Promise<Metadata> => {
-     const search = await searchParams
-     const result = await getTemplatesFromCDN();
+     const [search, result] = await Promise.all([
+          searchParams,
+          getAllTemplates()
+     ]);
      const allowedPageSizes = [4, 8, 16, 24];
      const requestedPageSize = Number(search.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
@@ -38,8 +40,10 @@ export const generateMetadata = async({searchParams}: PageProps): Promise<Metada
 export const revalidate = 86400;
 
 export default async function TemplatesMainPage({ searchParams }: PageProps){
-     const params = await searchParams;
-     const result = await getTemplatesFromCDN();
+     const [params, result] = await Promise.all([
+          searchParams,
+          getAllTemplates()
+     ]);
      const allowedPageSizes = [4, 8, 16, 24];
      const requestedPageSize = Number(params.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;

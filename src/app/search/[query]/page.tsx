@@ -23,9 +23,11 @@ export const generateStaticParams = async() => {
 export const revalidate = 86400
 
 export async function generateMetadata({params, searchParams}: ExperimentSearchProps): Promise<Metadata>{
-     const {query} = await params;
-     const search = await searchParams
-     const result = await getAllExperiments();
+     const [{query},search, result] = await Promise.all([
+          params,
+          searchParams,
+          getAllExperiments()
+     ]);
      const allowedPageSizes = [4,8,16,24,32,48];
      const requestedPageSize = Number(search.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
@@ -45,9 +47,11 @@ export async function generateMetadata({params, searchParams}: ExperimentSearchP
      }
 }
 export default async function ExperimentSearch({searchParams, params}: ExperimentSearchProps){
-     const {query} = await params
-     const search = await searchParams;
-     const result = await getAllExperiments();
+     const [{query},search, result] = await Promise.all([
+          params,
+          searchParams,
+          getAllExperiments()
+     ]);
      const allowedPageSizes = [4,8,16,24,32,48];
      const requestedPageSize = Number(search.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;

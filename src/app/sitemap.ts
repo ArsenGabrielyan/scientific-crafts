@@ -3,8 +3,10 @@ import { absoluteURL } from "@/lib/utils";
 import { MetadataRoute } from "next";
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
-     const allTags = await getAllTags()
-     const allSlugs = await getAllSlugs();
+     const [allTags, allSlugs] = await Promise.all([
+          getAllTags(),
+          getAllSlugs()
+     ]);
      const now = new Date()
      const experiments: MetadataRoute.Sitemap = allSlugs.map(val=>({
           url: absoluteURL(`/experiments/${val}`),
