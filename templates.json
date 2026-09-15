@@ -30,5 +30,13 @@
           "thumbnail": "/thumbnails/soap-boat.webp",
           "categories": ["fluid-mechanics","surface-chemistry"],
           "pages": 1
+     },
+     {
+          "slug": "flowers",
+          "title": "Բացվող ծաղիկ",
+          "file": "/pdf/flowers.pdf",
+          "thumbnail": "/thumbnails/flowers.webp",
+          "categories": ["physics"],
+          "pages": 1
      }
 ]
