@@ -4,7 +4,7 @@ All notable changes to Scientific Crafts will be documented here.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## 1.0.1 - Unreleased
+## 1.0.1 - 2026-09-15
 ### Added
 - Ellipsis logic onto the experiments card (Line Clamp)
 ### Changed
@@ -19,6 +19,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Fireproof balloon
 - Coke and Mentos Experiment
 - Coin Drop
+- The M&M's Art
+- Lava Lamp
+- Pencil, Water, and Bag experiment
+- Balloon Car
 
 ## 1.0.0 - 2026-09-14
 ### Added

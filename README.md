@@ -58,16 +58,16 @@ The project began in 2018 as a video series of science experiments, and is now e
 
 ### Planned Improvements
 - [ ] I18N Support
-- [ ] New Experiments
+- [X] New Experiments
   - [X] How to make a rainbow
   - [X] Flower is blooming
   - [X] The Balloon gets darker
   - [X] Coke & Mentos Experiment
   - [X] Coin Drop
-  - [ ] [The M&M's art](https://www.youtube.com/watch?v=k_76AexC0p8)
-  - [ ] [Lava Lamp](https://www.youtube.com/watch?v=a3S6qKryi0E)
-  - [ ] [Experiment with water and pencil](https://www.youtube.com/watch?v=dlcrlUdsBFA)
-  - [ ] [Balloon-powered car](https://www.youtube.com/watch?v=bmV0Hj4S0L8)
+  - [X] The M&M's art
+  - [X] Lava Lamp
+  - [X] Experiment with water and pencil
+  - [X] Balloon-powered car
 
 ## Versioning
 This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog][changelog-url] for details on each website version.
