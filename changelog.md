@@ -4,6 +4,17 @@ All notable changes to Scientific Crafts will be documented here.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## 1.0.1 - Unreleased
+### Changed
+- Swapped Tags and related experiments placed
+### Fixed
+- UI bug on a single experiment page
+### New Template
+- Blooming paper flower template
+### New Experiments
+- Paper Towel Rainbow
+- Blooming Paper Flower
+
 ## 1.0.0 - 2026-09-14
 ### Added
 - OpenGraph and Twitter images
