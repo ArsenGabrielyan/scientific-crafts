@@ -1,11 +1,11 @@
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
-import { Card, CardHeader, CardAction, CardTitle, CardFooter } from "../ui/card";
+import { Card, CardHeader, CardAction, CardTitle, CardFooter, CardDescription } from "../ui/card";
 import type { Template } from "@/lib/types";
 import { absoluteCDN } from "@/lib/utils";
 import Link from "next/link";
-import { Download } from "lucide-react";
+import { Calendar, Download } from "lucide-react";
 
 interface TemplateCardProps{
      data: Template
@@ -25,6 +25,10 @@ export default function TemplateCard({data}: TemplateCardProps){
                          <Badge variant="secondary">{data.pages} էջ</Badge>
                     </CardAction>
                     <CardTitle>{data.title}</CardTitle>
+                    <CardDescription className="flex items-center gap-2">
+                         <Calendar className="size-4"/>
+                         {data.date}
+                    </CardDescription>
                </CardHeader>
                <CardFooter>
                     <Button className="w-full" asChild>

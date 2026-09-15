@@ -17,6 +17,7 @@ export interface Template {
      thumbnail: string;
      categories: TemplateFilterName[];
      pages: number;
+     date: string;
 }
 export type BlockquoteVariant = "note" | "tip" | "important" | "warning" | "caution"
 export interface IBlockquoteBox{

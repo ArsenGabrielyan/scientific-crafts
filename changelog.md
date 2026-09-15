@@ -8,9 +8,11 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Added
 - Ellipsis logic onto the experiments card (Line Clamp)
 - Equations on new experiments
+- Dates on templates
 ### Changed
 - Swapped Tags and related experiments placed
-### 
+- Sorted templates by newest
+### Fixed
 - UI bug on a single experiment page
 ### New Template
 - Blooming paper flower template

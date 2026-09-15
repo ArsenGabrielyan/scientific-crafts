@@ -58,6 +58,7 @@ The project began in 2018 as a video series of science experiments, and is now e
 
 ### Planned Improvements
 - [ ] I18N Support
+- [ ] Sort by date (Newest / Oldest)
 - [X] New Experiments
   - [X] How to make a rainbow
   - [X] Flower is blooming
