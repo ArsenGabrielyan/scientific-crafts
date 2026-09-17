@@ -38,7 +38,7 @@ const generateRSS = async() => {
                link: `${SITE_URL}/posts/${post.slug}`,
                date: new Date(post.date),
                category: post.categories.map(cat=>({name: cat})),
-               image: `${SITE_URL}/${post.thumbnail}`,
+               image: `${SITE_URL}${post.thumbnail}`,
                author: [
                     {
                          link: "https://github.com/ArsenGabrielyan",
