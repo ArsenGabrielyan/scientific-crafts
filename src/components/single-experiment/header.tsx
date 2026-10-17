@@ -11,7 +11,7 @@ export default function ExperimentHeader({experiment}: SingleExperimentComponent
           <section className="w-full min-h-[56dvh] flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background px-4">
                <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360 text-center">
                     <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold">{experiment.title}</h1>
-                    <p className="text-base md:text-lg text-muted-foreground">{experiment.description}</p>
+                    <p className="text-sm sm:text-base md:text-lg text-muted-foreground">{experiment.description}</p>
                     {experiment.categories.length !== 0 && (
                          <div className="flex items-center gap-2 flex-wrap">
                               {experiment.categories.map(category=>(
