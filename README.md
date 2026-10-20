@@ -61,20 +61,20 @@ The project began in 2018 as a video series of science experiments, and is now e
 - [ ] Sort by date (Newest / Oldest)
   - Experiments page
   - Templates page
-- [ ] New Experiments
-  - [ ] Transparent flame
-  - [ ] Whoosh Effect
-  - [ ] Straw Siphon
-  - [ ] Spinning Illusion
-  - [ ] Water Pepper Soap
-  - [ ] Paper Helicopter
-  - [ ] Match Coin
-  - [ ] Self-inflating bag
-  - [ ] Heavy smoke
-  - [ ] Water Rises
-  - [ ] Bottle Leak
-  - [ ] Broken ruler
-  - [ ] Hologram
+- [X] New Experiments
+  - [X] Transparent flame
+  - [X] Whoosh Effect
+  - [X] Straw Siphon
+  - [X] Spinning Illusion
+  - [X] Water Pepper Soap
+  - [X] Paper Helicopter
+  - [X] Match Coin
+  - [X] Self-inflating bag
+  - [X] Heavy smoke
+  - [X] Water Rises
+  - [X] Bottle Leak
+  - [X] Broken ruler
+  - [X] Hologram
 
 ## Versioning
 This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog][changelog-url] for details on each website version.
