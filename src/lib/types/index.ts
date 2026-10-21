@@ -28,3 +28,4 @@ export interface IBlockquoteBox{
      title: string
 }
 export type SearchPageMode = "search-template" | "search-page"
+export type SortType = "newest" | "oldest"

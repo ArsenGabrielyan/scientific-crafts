@@ -3,13 +3,15 @@ import TemplatesMainContent from "../../contents/templates";
 import { getAllTemplates } from "@/lib/helpers/templates";
 import { TEMPLATE_FILTER_NAMES, TemplateFilterName } from "@/lib/constants/filters";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
+import { SortType } from "@/lib/types";
 
 interface PageProps {
      searchParams: Promise<{
           page?: string;
           pageSize?: string;
           query?: string,
-          category?: TemplateFilterName
+          category?: TemplateFilterName,
+          sort?: SortType
      }>;
 }
 
@@ -60,11 +62,17 @@ export default async function TemplatesMainPage({ searchParams }: PageProps){
                ]
           })
      ) as Record<TemplateFilterName, number>
-     const totalResults = filteredTemplates.length
+     const sort: SortType = params.sort === "oldest" ? "oldest" : "newest"
+     const sortedTemplates = [...filteredTemplates].sort((a, b) =>
+          sort === "oldest"
+               ? new Date(a.date).getTime() - new Date(b.date).getTime()
+               : new Date(b.date).getTime() - new Date(a.date).getTime()
+     )
+     const totalResults = sortedTemplates.length
      const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
      const currPage = Math.min(Math.max(Number(params.page) || 1, 1),totalPages)
      const start = (currPage - 1) * pageSize
-     const templates = filteredTemplates.slice(start, start + pageSize)
+     const templates = sortedTemplates.slice(start, start + pageSize)
      return (
           <TemplatesMainContent
                templates={templates}
@@ -75,6 +83,7 @@ export default async function TemplatesMainPage({ searchParams }: PageProps){
                allCount={searchResults.length}
                initialCategory={category}
                initialQuery={params.query}
+               initialSort={sort}
           />
      )
 }

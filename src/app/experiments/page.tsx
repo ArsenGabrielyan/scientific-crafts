@@ -4,6 +4,7 @@ import { getAllExperiments } from "@/lib/helpers/experiments";
 import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
 import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
+import { SortType } from "@/lib/types";
 
 interface PageProps {
      searchParams: Promise<{
@@ -13,7 +14,8 @@ interface PageProps {
           category?: ExperimentFilterName
           difficulty?: keyof typeof DIFFICULTIES
           duration?: keyof typeof DURATIONS
-          selfGuided?: string
+          selfGuided?: string,
+          sort?: SortType
      }>;
 }
 
@@ -69,11 +71,17 @@ export default async function ExperimentsMainPage({ searchParams }: PageProps){
                ]
           })
      ) as Record<ExperimentFilterName, number>
-     const totalResults = filteredExperiments.length
+     const sort: SortType = params.sort === "oldest" ? "oldest" : "newest"
+     const sortedExperiments = [...filteredExperiments].sort((a, b) =>
+          sort === "oldest"
+               ? new Date(a.date).getTime() - new Date(b.date).getTime()
+               : new Date(b.date).getTime() - new Date(a.date).getTime()
+     )
+     const totalResults = sortedExperiments.length
      const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
      const currPage = Math.min(Math.max(Number(params.page) || 1, 1),totalPages)
      const start = (currPage - 1) * pageSize
-     const experiments = filteredExperiments.slice(start, start + pageSize)
+     const experiments = sortedExperiments.slice(start, start + pageSize)
      return (
           <ExperimentsMainContent
                experiments={experiments}
@@ -87,6 +95,7 @@ export default async function ExperimentsMainPage({ searchParams }: PageProps){
                initialDifficulty={params.difficulty}
                initialDuration={params.duration}
                initialSelfGuided={params.selfGuided === "true"}
+               initialSort={sort}
           />
      )
 }

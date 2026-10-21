@@ -4,11 +4,13 @@ import PaginationWithLinks from "@/components/pagination-with-links"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import SearchField from "@/components/fields/search"
-import type { Template } from "@/lib/types"
+import type { SortType, Template } from "@/lib/types"
 import TemplatesList from "@/components/lists/templates"
 import { TEMPLATE_FILTER_NAMES, TemplateFilterName } from "@/lib/constants/filters"
 import { usePathname, useRouter } from "next/navigation"
 import { FilterX } from "lucide-react"
+import SelectorField from "@/components/fields/selector"
+import { SORT_VALUES } from "@/lib/constants"
 
 interface TemplatesMainContentProps {
      templates: Template[]
@@ -19,6 +21,7 @@ interface TemplatesMainContentProps {
      allCount: number
      initialQuery?: string
      initialCategory?: TemplateFilterName
+     initialSort?: SortType
 }
 
 export default function TemplatesMainContent({
@@ -29,12 +32,27 @@ export default function TemplatesMainContent({
      totalResults,
      allCount,
      initialQuery,
-     initialCategory
+     initialCategory,
+     initialSort,
 }: TemplatesMainContentProps) {
      const router = useRouter()
      const pathname = usePathname()
      const [input, setInput] = useState(initialQuery ?? "")
      const [currFilter, setCurrFilter] = useState<"all" | TemplateFilterName>(initialCategory ?? "all")
+     const [sortType, setSortType] = useState<SortType>(initialSort ?? "newest");
+     function handleSort(value: SortType) {
+          setSortType(value)
+          const params = new URLSearchParams(window.location.search)
+          params.set("page", "1")
+          if (value === "newest") {
+               params.delete("sort")
+          } else {
+               params.set("sort", value)
+          }
+          router.push(`${pathname}?${params.toString()}`, {
+               scroll: false
+          })
+     }
      function handleSearch(value: string) {
           setInput(value)
           const params = new URLSearchParams(window.location.search)
@@ -123,6 +141,12 @@ export default function TemplatesMainContent({
                </section>
                <section className="w-full py-4 px-8 flex justify-center items-center scroll-mt-10">
                     <div className="w-full max-w-360 space-y-4">
+                         <SelectorField
+                              placeholder="Դասավորել գիտափորձերը"
+                              value={sortType}
+                              onChange={value => handleSort(value as SortType)}
+                              items={SORT_VALUES}
+                         />
                          <TemplatesList templates={templates} />
                          <PaginationWithLinks
                               totalCount={totalResults}

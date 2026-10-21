@@ -58,7 +58,7 @@ The project began in 2018 as a video series of science experiments, and is now e
 
 ### Planned Improvements
 - [ ] I18N Support
-- [ ] Sort by date (Newest / Oldest)
+- [X] Sort by date (Newest / Oldest)
   - Experiments page
   - Templates page
 - [X] Clear filters button

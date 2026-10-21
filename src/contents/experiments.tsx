@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { DEFAULT_VALUE, DIFFICULTIES, DURATIONS } from "@/lib/constants";
+import { DEFAULT_VALUE, DIFFICULTIES, DURATIONS, SORT_VALUES } from "@/lib/constants";
 import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
 import { SearchSchema } from "@/lib/schemas";
-import { SearchPageMode, SearchType } from "@/lib/types";
+import { SearchPageMode, SearchType, SortType } from "@/lib/types";
 import type { ExperimentMetadata } from "@/lib/types/experiment";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FilterX, Search, ShieldCheck } from "lucide-react";
@@ -32,6 +32,7 @@ interface ExperimentsMainContentProps {
      totalResults: number
      allCount: number,
      mode?: SearchPageMode
+     initialSort?: SortType
 }
 export default function ExperimentsMainContent({
      experiments,
@@ -45,15 +46,17 @@ export default function ExperimentsMainContent({
      initialDifficulty,
      initialDuration,
      initialSelfGuided,
+     initialSort,
      mode="search-page"
 }: ExperimentsMainContentProps){
      const router = useRouter()
      const pathname = usePathname()
      const [input, setInput] = useState(initialQuery ?? "")
      const [currFilter, setCurrFilter] = useState<"all" | ExperimentFilterName>(initialCategory ?? "all")
-     const [difficulty, setDifficulty] = useState(initialDifficulty ?? "")
-     const [duration, setDuration] = useState(initialDuration ?? "")
+     const [difficulty, setDifficulty] = useState<keyof typeof DIFFICULTIES | "">(initialDifficulty ?? "")
+     const [duration, setDuration] = useState<keyof typeof DURATIONS | "">(initialDuration ?? "")
      const [selfGuided, setSelfGuided] = useState(initialSelfGuided ?? false)
+     const [sortType, setSortType] = useState<SortType>(initialSort ?? "newest");
      const form = useForm<SearchType>({
           resolver: zodResolver(SearchSchema),
           defaultValues: {
@@ -61,6 +64,19 @@ export default function ExperimentsMainContent({
           },
           mode: "onChange"
      })
+     function handleSort(value: SortType) {
+          setSortType(value)
+          const params = new URLSearchParams(window.location.search)
+          params.set("page", "1")
+          if (value === "newest") {
+               params.delete("sort")
+          } else {
+               params.set("sort", value)
+          }
+          router.push(`${pathname}?${params.toString()}`, {
+               scroll: false
+          })
+     }
      function handleSearch(value: string) {
           setInput(value)
           const params = new URLSearchParams(window.location.search)
@@ -227,46 +243,53 @@ export default function ExperimentsMainContent({
                </section>
                <section className="w-full py-4 px-8 flex justify-center items-center flex-col gap-4 scroll-mt-10">
                     <div className="w-full max-w-360 space-y-4">
-                         <div className="flex items-center gap-2 flex-wrap">
-                              <SelectorField
-                                   placeholder="Բարդություն"
-                                   value={difficulty}
-                                   onChange={val=>handleDifficulty(val as keyof typeof DIFFICULTIES)}
-                                   items={[
-                                        DEFAULT_VALUE,
-                                        ...Object.entries(DIFFICULTIES).map(([key,val])=>({
-                                             value: key,
-                                             label: val
-                                        }))
-                                   ]}
-                                   className="flex-1"
-                              />
-                              <SelectorField
-                                   placeholder="Տևողություն"
-                                   value={duration}
-                                   onChange={val=>handleDuration(val as keyof typeof DURATIONS)}
-                                   items={[
-                                        DEFAULT_VALUE,
-                                        ...Object.entries(DURATIONS).map(([key,val])=>({
-                                             value: key,
-                                             label: val
-                                        }))
-                                   ]}
-                                   className="flex-1"
-                              />
-                              <div className="rounded-md shadow-xs border bg-background p-2 flex justify-between items-center flex-1 dark:bg-input/30 dark:hover:bg-input/50 border-input aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50">
-                                   <div className="flex items-center gap-2">
-                                        <ShieldCheck className="text-emerald-500 dark:text-emerald-400 size-4.5"/> 
-                                        <Label htmlFor="self-guided">
-                                             Միայն ինքնուրույն կատարվող
-                                        </Label>
-                                   </div>
-                                   <Switch
-                                        id="self-guided"
-                                        checked={selfGuided}
-                                        onCheckedChange={handleSelfGuided}
+                         <div className="flex items-center justify-center md:justify-between flex-col md:flex-row gap-2 flex-wrap">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                   <SelectorField
+                                        placeholder="Բարդություն"
+                                        value={difficulty}
+                                        onChange={val=>handleDifficulty(val as keyof typeof DIFFICULTIES)}
+                                        items={[
+                                             DEFAULT_VALUE,
+                                             ...Object.entries(DIFFICULTIES).map(([key,val])=>({
+                                                  value: key,
+                                                  label: val
+                                             }))
+                                        ]}
                                    />
+                                   <SelectorField
+                                        placeholder="Տևողություն"
+                                        value={duration}
+                                        onChange={val=>handleDuration(val as keyof typeof DURATIONS)}
+                                        items={[
+                                             DEFAULT_VALUE,
+                                             ...Object.entries(DURATIONS).map(([key,val])=>({
+                                                  value: key,
+                                                  label: val
+                                             }))
+                                        ]}
+                                   />
+                                   <div className="rounded-md shadow-xs border bg-background p-2 flex justify-between items-center dark:bg-input/30 dark:hover:bg-input/50 border-input aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 gap-4">
+                                        <div className="flex items-center gap-2">
+                                             <ShieldCheck className="text-emerald-500 dark:text-emerald-400 size-4.5"/> 
+                                             <Label htmlFor="self-guided">
+                                                  Միայն ինքնուրույն կատարվող
+                                             </Label>
+                                        </div>
+                                        <Switch
+                                             id="self-guided"
+                                             checked={selfGuided}
+                                             onCheckedChange={handleSelfGuided}
+                                        />
+                                   </div>
                               </div>
+                              <SelectorField
+                                   placeholder="Դասավորել գիտափորձերը"
+                                   value={sortType}
+                                   onChange={value => handleSort(value as SortType)}
+                                   items={SORT_VALUES}
+                                   className="max-w-xs"
+                              />
                          </div>
                          <ExperimentsList experiments={experiments}/>
                          <PaginationWithLinks
