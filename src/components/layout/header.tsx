@@ -12,8 +12,8 @@ import { FileText, FlaskConical, Home, Menu, Scissors, X } from "lucide-react";
 const LINKS = [
      { name: "Գլխավոր", href: "/#hero", Icon: Home },
      { name: "Մեր Մասին", href: "/#about", Icon: FileText },
-     { name: "Գիտական Փորձեր", href: "/#experiments", Icon: FlaskConical },
-     { name: "Շաբլոններ", href: "/#templates", Icon: Scissors },
+     { name: "Գիտական Փորձեր", href: "/experiments", Icon: FlaskConical },
+     { name: "Շաբլոններ", href: "/templates", Icon: Scissors },
 ]
 
 export default function SiteHeader(){

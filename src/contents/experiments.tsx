@@ -8,13 +8,13 @@ import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
+import { DEFAULT_VALUE, DIFFICULTIES, DURATIONS } from "@/lib/constants";
 import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
 import { SearchSchema } from "@/lib/schemas";
 import { SearchPageMode, SearchType } from "@/lib/types";
 import type { ExperimentMetadata } from "@/lib/types/experiment";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Search, ShieldCheck } from "lucide-react";
+import { FilterX, Search, ShieldCheck } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -49,10 +49,10 @@ export default function ExperimentsMainContent({
 }: ExperimentsMainContentProps){
      const router = useRouter()
      const pathname = usePathname()
-     const [input, setInput] = useState(initialQuery || "")
-     const [currFilter, setCurrFilter] = useState<"all" | ExperimentFilterName>(initialCategory || "all")
-     const [difficulty, setDifficulty] = useState(initialDifficulty)
-     const [duration, setDuration] = useState(initialDuration)
+     const [input, setInput] = useState(initialQuery ?? "")
+     const [currFilter, setCurrFilter] = useState<"all" | ExperimentFilterName>(initialCategory ?? "all")
+     const [difficulty, setDifficulty] = useState(initialDifficulty ?? "")
+     const [duration, setDuration] = useState(initialDuration ?? "")
      const [selfGuided, setSelfGuided] = useState(initialSelfGuided ?? false)
      const form = useForm<SearchType>({
           resolver: zodResolver(SearchSchema),
@@ -65,7 +65,7 @@ export default function ExperimentsMainContent({
           setInput(value)
           const params = new URLSearchParams(window.location.search)
           params.set("page", "1")
-          if (value.trim()) {
+          if (value.trim()!=="") {
                params.set("query", value.trim())
           } else {
                params.delete("query")
@@ -76,65 +76,86 @@ export default function ExperimentsMainContent({
      }
      function handleFilter(filter: "all" | ExperimentFilterName) {
           setCurrFilter(filter)
-
           const params = new URLSearchParams(window.location.search)
           params.set("page", "1")
-
           if (filter === "all") {
                params.delete("category")
           } else {
                params.set("category", filter)
           }
-
           router.push(`${pathname}?${params.toString()}`, {
                scroll: false
           })
      }
-
-     function handleDifficulty(value: keyof typeof DIFFICULTIES) {
+     function handleDifficulty(value: keyof typeof DIFFICULTIES | "") {
           setDifficulty(value)
-
           const params = new URLSearchParams(window.location.search)
           params.set("page", "1")
-          params.set("difficulty", value)
-
+          if(value!=="") {
+               params.set("difficulty", value)
+          } else {
+               params.delete("difficulty")
+          }
           router.push(`${pathname}?${params.toString()}`, {
                scroll: false
           })
      }
-
-     function handleDuration(value: keyof typeof DURATIONS) {
+     function handleDuration(value: keyof typeof DURATIONS | "") {
           setDuration(value)
-
           const params = new URLSearchParams(window.location.search)
           params.set("page", "1")
-          params.set("duration", value)
-
+          if(value!=="") {
+               params.set("duration", value)
+          } else {
+               params.delete("duration")
+          }
           router.push(`${pathname}?${params.toString()}`, {
                scroll: false
           })
      }
-
      function handleSelfGuided(value: boolean) {
           setSelfGuided(value)
-
           const params = new URLSearchParams(window.location.search)
           params.set("page", "1")
-
           if (value) {
                params.set("selfGuided", "true")
           } else {
                params.delete("selfGuided")
           }
-
           router.push(`${pathname}?${params.toString()}`, {
                scroll: false
           })
      }
-     const onSubmit = ({query}: SearchType) => {
-          const params = new URLSearchParams({ query });
-          router.push(`/experiments?${params.toString()}`);
+     function handleClearFilters() {
+          setInput("")
+          setCurrFilter("all")
+          setDifficulty("")
+          setDuration("")
+          setSelfGuided(false)
+          const params = new URLSearchParams(window.location.search)
+          params.set("page", "1")
+          params.delete("query")
+          params.delete("category")
+          params.delete("difficulty")
+          params.delete("duration")
+          params.delete("selfGuided")
+          router.replace(`${pathname}?${params.toString()}`, {
+               scroll: false
+          })
      }
+     const onSubmit = ({query}: SearchType) => {
+          const params = new URLSearchParams(window.location.search)
+          params.set("page", "1")
+          if (query.trim()) {
+               params.set("query", query.trim())
+          } else {
+               params.delete("query")
+          }
+          router.push(`${pathname}?${params.toString()}`, {
+               scroll: false
+          })
+     }
+     const isEmpty = input.trim() === "" && currFilter === "all" && !difficulty && !duration && !selfGuided
      return (
           <SiteLayout>
                <section className="w-full min-h-[64dvh] flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background px-4">
@@ -165,13 +186,20 @@ export default function ExperimentsMainContent({
                                    </ButtonGroup>
                               </form>
                          ) : (
-                              <SearchField
-                                   placeholder="Որոնել"
-                                   value={input}
-                                   onChange={e => handleSearch(e.target.value)}
-                                   onClearSearch={() => handleSearch("")}
-                                   groupClassName="bg-background/50"
-                              />
+                              <div className="flex items-center gap-2 w-full">
+                                   <SearchField
+                                        placeholder="Որոնել"
+                                        value={input}
+                                        onChange={e => handleSearch(e.target.value)}
+                                        groupClassName="bg-background/50"
+                                        excludeClearButton
+                                   />
+                                   {!isEmpty && (
+                                        <Button variant="destructive" size="icon" title="Մաքրել ֆիլտրները" onClick={handleClearFilters}>
+                                             <FilterX/>
+                                        </Button>
+                                   )}
+                              </div>
                          )}
                          <div className="flex items-center gap-2 flex-wrap">
                               <Button
@@ -204,20 +232,26 @@ export default function ExperimentsMainContent({
                                    placeholder="Բարդություն"
                                    value={difficulty}
                                    onChange={val=>handleDifficulty(val as keyof typeof DIFFICULTIES)}
-                                   items={Object.entries(DIFFICULTIES).map(([key,val])=>({
-                                        value: key,
-                                        label: val
-                                   }))}
+                                   items={[
+                                        DEFAULT_VALUE,
+                                        ...Object.entries(DIFFICULTIES).map(([key,val])=>({
+                                             value: key,
+                                             label: val
+                                        }))
+                                   ]}
                                    className="flex-1"
                               />
                               <SelectorField
                                    placeholder="Տևողություն"
                                    value={duration}
                                    onChange={val=>handleDuration(val as keyof typeof DURATIONS)}
-                                   items={Object.entries(DURATIONS).map(([key,val])=>({
-                                        value: key,
-                                        label: val
-                                   }))}
+                                   items={[
+                                        DEFAULT_VALUE,
+                                        ...Object.entries(DURATIONS).map(([key,val])=>({
+                                             value: key,
+                                             label: val
+                                        }))
+                                   ]}
                                    className="flex-1"
                               />
                               <div className="rounded-md shadow-xs border bg-background p-2 flex justify-between items-center flex-1 dark:bg-input/30 dark:hover:bg-input/50 border-input aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50">

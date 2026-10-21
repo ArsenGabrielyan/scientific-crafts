@@ -8,6 +8,7 @@ import type { Template } from "@/lib/types"
 import TemplatesList from "@/components/lists/templates"
 import { TEMPLATE_FILTER_NAMES, TemplateFilterName } from "@/lib/constants/filters"
 import { usePathname, useRouter } from "next/navigation"
+import { FilterX } from "lucide-react"
 
 interface TemplatesMainContentProps {
      templates: Template[]
@@ -32,13 +33,13 @@ export default function TemplatesMainContent({
 }: TemplatesMainContentProps) {
      const router = useRouter()
      const pathname = usePathname()
-     const [input, setInput] = useState(initialQuery || "")
-     const [currFilter, setCurrFilter] = useState<"all" | TemplateFilterName>(initialCategory || "all")
+     const [input, setInput] = useState(initialQuery ?? "")
+     const [currFilter, setCurrFilter] = useState<"all" | TemplateFilterName>(initialCategory ?? "all")
      function handleSearch(value: string) {
           setInput(value)
           const params = new URLSearchParams(window.location.search)
           params.set("page", "1")
-          if (value.trim()) {
+          if (value.trim()!=="") {
                params.set("query", value.trim())
           } else {
                params.delete("query")
@@ -60,6 +61,18 @@ export default function TemplatesMainContent({
                scroll: false
           })
      }
+     function handleClearFilters() {
+          setInput("")
+          setCurrFilter("all")
+          const params = new URLSearchParams(window.location.search)
+          params.set("page", "1")
+          params.delete("query")
+          params.delete("category")
+          router.replace(`${pathname}?${params.toString()}`, {
+               scroll: false
+          })
+     }
+     const isEmpty = input.trim() === "" && currFilter === "all"
      return (
           <SiteLayout>
                <section className="w-full min-h-[60dvh] flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background px-4">
@@ -70,13 +83,20 @@ export default function TemplatesMainContent({
                          <p className="text-base md:text-lg text-muted-foreground">
                               Հատուկ շաբլոններ՝ գիտափորձեր կատարելու համար
                          </p>
-                         <SearchField
-                              placeholder="Որոնել"
-                              value={input}
-                              onChange={e => handleSearch(e.target.value)}
-                              onClearSearch={() => handleSearch("")}
-                              groupClassName="bg-background/50"
-                         />
+                         <div className="flex items-center gap-2 w-full">
+                              <SearchField
+                                   placeholder="Որոնել"
+                                   value={input}
+                                   onChange={e => handleSearch(e.target.value)}
+                                   groupClassName="bg-background/50"
+                                   excludeClearButton
+                              />
+                              {!isEmpty && (
+                                   <Button variant="destructive" size="icon" title="Մաքրել ֆիլտրները" onClick={handleClearFilters}>
+                                        <FilterX/>
+                                   </Button>
+                              )}
+                         </div>
                          <div className="flex items-center gap-2 flex-wrap">
                               <Button
                                    variant={currFilter === "all" ? "default" : "outline"}

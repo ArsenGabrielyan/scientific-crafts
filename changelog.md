@@ -4,6 +4,24 @@ All notable changes to Scientific Crafts will be documented here.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## 1.0.2 - Unreleased
+### Added
+- Clear Filters button on the search box
+### New Experiments
+- Transparent flame
+- Whoosh Effect
+- Straw Siphon
+- Spinning Illusion
+- Water Pepper Soap
+- Paper Helicopter
+- Match Coin
+- Self-inflating bag
+- Heavy smoke
+- Water Rises
+- Bottle Leak
+- Broken ruler
+- Hologram
+
 ## 1.0.1 - 2026-09-15
 ### Added
 - Ellipsis logic onto the experiments card (Line Clamp)

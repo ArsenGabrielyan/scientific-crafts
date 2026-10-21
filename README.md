@@ -61,7 +61,7 @@ The project began in 2018 as a video series of science experiments, and is now e
 - [ ] Sort by date (Newest / Oldest)
   - Experiments page
   - Templates page
-- [ ] Clear filters button
+- [X] Clear filters button
 - [X] New Experiments
   - [X] Transparent flame
   - [X] Whoosh Effect
