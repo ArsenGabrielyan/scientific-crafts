@@ -1,7 +1,7 @@
 import TemplatesList from "@/components/lists/templates";
 import { Button } from "@/components/ui/button";
 import type { Template } from "@/lib/types";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 interface TemplatesSectionProps{
      templates: Template[]

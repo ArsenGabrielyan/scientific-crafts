@@ -19,7 +19,8 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-import { usePathname, useSearchParams, useRouter } from "next/navigation"
+import { useSearchParams } from "next/navigation"
+import { usePathname, useRouter } from "@/i18n/navigation"
 
 export interface PaginationWithLinksProps {
   pageSizeSelectOptions?: {

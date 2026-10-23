@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Card, CardHeader, CardAction, CardTitle, CardFooter, CardDescription } from "../ui/card";
 import type { Template } from "@/lib/types";
 import { absoluteCDN } from "@/lib/utils";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Calendar, Download } from "lucide-react";
 
 interface TemplateCardProps{

@@ -3,7 +3,7 @@ import { Search } from "lucide-react";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { ButtonGroup } from "./ui/button-group";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import SearchField from "./fields/search";
 import { SearchSchema } from "@/lib/schemas";
 import type { SearchType } from "@/lib/types";

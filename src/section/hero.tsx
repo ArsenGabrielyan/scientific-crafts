@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { PlayCircle, RssIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export default function HeroSection(){
      return (

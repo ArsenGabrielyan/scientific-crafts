@@ -3,7 +3,7 @@ import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { Card, CardHeader, CardAction, CardTitle, CardDescription, CardFooter } from "../ui/card";
 import type { ExperimentMetadata } from "@/lib/types/experiment";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { EXPERIMENT_FILTER_NAMES } from "@/lib/constants/filters";
 
 interface ExperimentCardProps{

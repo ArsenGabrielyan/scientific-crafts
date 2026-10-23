@@ -1,7 +1,7 @@
 import ExperimentsList from "@/components/lists/experiments";
 import { Button } from "@/components/ui/button";
 import type { ExperimentMetadata } from "@/lib/types/experiment";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 interface ExperimentsSectionProps{
      experiments: ExperimentMetadata[]

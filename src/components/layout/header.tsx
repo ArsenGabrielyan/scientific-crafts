@@ -6,7 +6,7 @@ import { cn } from "cn";
 import ModeToggler from "../themes/toggler";
 import SearchPopup from "../search";
 import { useCurrentTheme } from "@/hooks/use-current-theme";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { FileText, FlaskConical, Home, Menu, Scissors, X } from "lucide-react";
 import LanguageSwitcher from "../lang-switcher";
 import { useIsMobile } from "@/hooks/use-mobile";

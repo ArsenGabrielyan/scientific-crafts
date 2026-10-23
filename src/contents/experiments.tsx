@@ -15,7 +15,7 @@ import { SearchPageMode, SearchType, SortType } from "@/lib/types";
 import type { ExperimentMetadata } from "@/lib/types/experiment";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FilterX, Search, ShieldCheck } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 

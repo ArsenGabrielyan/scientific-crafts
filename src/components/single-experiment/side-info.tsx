@@ -3,7 +3,7 @@ import type { SingleExperimentComponentProps } from "@/lib/types/experiment";
 import { PlayCircle } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export default function ExperimentSideInfo({experiment}: SingleExperimentComponentProps){
      return (
