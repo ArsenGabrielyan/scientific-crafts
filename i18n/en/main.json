@@ -1,0 +1,39 @@
+{
+  "experiments": {
+    "desc": "Here you'll discover more science experiments",
+    "title": "Science Experiments"
+  },
+  "not-found": {
+    "back": "Go back",
+    "desc": "The page you are looking for couldn't be found. You may have entered the address incorrectly, the page may have been moved, or it may not exist at all.",
+    "page-title": "Page not found",
+    "title": "Oops... The page is not found"
+  },
+  "search": {
+    "desc": "Explore the {total, number} scientific experiments tagged with “{query}”",
+    "title": "The best {total, number} scientific experiments tagged \"{query}\" – Updated {year, number}"
+  },
+  "site": {
+    "author": "Arsen G.",
+    "desc": "Learn more about science, physics, chemistry, and STEM (science, technology, engineering, math) by testing lots of science experiments.",
+    "title": {
+      "absolute": "Scientific Crafts - Science, Physics, Chemistry, and more.",
+      "short": "Scientific Crafts",
+      "template": "%s | Scientific Crafts"
+    },
+    "lang-switcher-label": "Change the language",
+    "theme-toggler-label": "Change theme"
+  },
+  "templates": {
+    "desc": "Special templates for doing science experiments",
+    "title": "Templates"
+  },
+  "blockquote": {
+    "title": "Blockquote",
+    "note": "Note",
+    "tip": "Tip",
+    "important": "Important",
+    "warning": "Warning",
+    "caution": "Caution"
+  }
+}

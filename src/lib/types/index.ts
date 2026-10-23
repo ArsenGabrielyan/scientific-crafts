@@ -25,7 +25,6 @@ export interface IBlockquoteBox{
      lineClass: string,
      Icon: LucideIcon,
      iconClass: string,
-     title: string
 }
 export type SearchPageMode = "search-template" | "search-page"
 export type SortType = "newest" | "oldest"

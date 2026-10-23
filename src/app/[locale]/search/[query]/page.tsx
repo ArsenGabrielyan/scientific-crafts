@@ -4,6 +4,7 @@ import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/f
 import { getAllExperiments, getAllTags } from "@/lib/helpers/experiments";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 interface ExperimentSearchProps{
      params: Promise<{query: string}>
@@ -35,10 +36,18 @@ export async function generateMetadata({params, searchParams}: ExperimentSearchP
      const searchResults = result.filter(item =>!queryDecoded || item.tags.includes(queryDecoded))
      const totalResults = searchResults.length
      const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
-     const currPage = Math.min(Math.max(Number(search.page) || 1, 1),totalPages)
+     const currPage = Math.min(Math.max(Number(search.page) || 1, 1),totalPages);
+     const t = await getTranslations("search")
      return {
-          title: `«${queryDecoded}» պիտակով նշված լավագույն ${totalResults} գիտական փորձեր - Թարմացված ${new Date().getFullYear()}թ․`,
-          description: `Ուսումնասիրեք «${queryDecoded}» պիտակով նշված ${totalResults} գիտական փորձերը`,
+          title: t("title",{
+               query: queryDecoded,
+               total: totalResults,
+               year: new Date().getFullYear()
+          }),
+          description: t("desc",{
+               query: queryDecoded,
+               total: totalResults
+          }),
           pagination: {
                previous: currPage > 1 ? absoluteURL(`/templates/${queryDecoded}?page=${currPage - 1}`) : undefined,
                next: currPage < totalPages ? absoluteURL(`/templates/${queryDecoded}?page=${currPage + 1}`) : undefined

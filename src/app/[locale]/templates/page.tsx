@@ -1,9 +1,10 @@
 import { Metadata } from "next";
-import TemplatesMainContent from "../../contents/templates";
+import TemplatesMainContent from "../../../contents/templates";
 import { getAllTemplates } from "@/lib/helpers/templates";
 import { TEMPLATE_FILTER_NAMES, TemplateFilterName } from "@/lib/constants/filters";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 import { SortType } from "@/lib/types";
+import { getTranslations } from "next-intl/server";
 
 interface PageProps {
      searchParams: Promise<{
@@ -28,9 +29,10 @@ export const generateMetadata = async({searchParams}: PageProps): Promise<Metada
      const totalResults = searchResults.length
      const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
      const currPage = Math.min(Math.max(Number(search.page) || 1, 1),totalPages)
+     const t = await getTranslations("templates")
      return {
-          title: "Շաբլոններ",
-          description: "Հատուկ շաբլոններ՝ գիտափորձեր կատարելու համար",
+          title: t("title"),
+          description: t("desc"),
           pagination: {
                previous: currPage > 1 ? absoluteURL(`/templates?page=${currPage - 1}`) : undefined,
                next: currPage < totalPages ? absoluteURL(`/templates?page=${currPage + 1}`) : undefined

@@ -1,10 +1,11 @@
 import { Metadata } from "next"
-import ExperimentsMainContent from "../../contents/experiments"
+import ExperimentsMainContent from "../../../contents/experiments"
 import { getAllExperiments } from "@/lib/helpers/experiments";
 import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
 import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 import { SortType } from "@/lib/types";
+import { getTranslations } from "next-intl/server";
 
 interface PageProps {
      searchParams: Promise<{
@@ -32,9 +33,10 @@ export const generateMetadata = async({ searchParams }: PageProps): Promise<Meta
      const totalResults = searchResults.length
      const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
      const currPage = Math.min(Math.max(Number(search.page) || 1, 1),totalPages)
+     const t = await getTranslations("experiments");
      return {
-          title: "Գիտական փորձեր",
-          description: "Այստեղ դուք կուսումնասիրեք և կկատարեք լիքը գիտական փորձեր։",
+          title: t("title"),
+          description: t("desc"),
           pagination: {
                previous: currPage > 1 ? absoluteURL(`/experiments?page=${currPage - 1}`) : undefined,
                next: currPage < totalPages ? absoluteURL(`/experiments?page=${currPage + 1}`) : undefined

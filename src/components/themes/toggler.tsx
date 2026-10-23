@@ -4,14 +4,16 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function ModeToggler() {
+  const t = useTranslations("site")
   const { setTheme, theme } = useTheme();
   return (
     <Button
       variant="outline"
       size="icon"
-      title="Փոխել ոճը"
+      title={t("theme-toggler-label")}
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >
       <Sun
@@ -22,7 +24,7 @@ export default function ModeToggler() {
         className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0
           dark:scale-100"
       />
-      <span className="sr-only">Փոխել ոճը</span>
+      <span className="sr-only">{t("theme-toggler-label")}</span>
     </Button>
   );
 }

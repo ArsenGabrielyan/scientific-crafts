@@ -2,6 +2,7 @@ import type { BlockquoteVariant, IBlockquoteBox } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import React from "react";
 import {Info, Lightbulb, CircleAlert, TriangleAlert, ShieldAlert} from "lucide-react"
+import { useTranslations } from "next-intl";
 
 function extractTextFromReactNode(node: React.ReactNode): string {
      if (typeof node === "string") return node;
@@ -31,35 +32,30 @@ const variantMap: Record<BlockquoteVariant,IBlockquoteBox> = {
           lineClass: "border-blue-600",
           Icon: Info,
           iconClass: "text-blue-700",
-          title: "Նշում"
      },
      tip: {
           boxClass: "border-emerald-500 bg-emerald-500/10",
           lineClass: "border-emerald-600",
           Icon: Lightbulb,
           iconClass: "text-emerald-700",
-          title: "Խորհուրդ"
      },
      important: {
           boxClass: "border-violet-500 bg-violet-500/10",
           lineClass: "border-violet-600",
           Icon: CircleAlert,
           iconClass: "text-violet-700",
-          title: "Կարևոր"
      },
      warning: {
           boxClass: "border-amber-500 bg-amber-500/10",
           lineClass: "border-amber-600",
           Icon: TriangleAlert,
           iconClass: "text-amber-700",
-          title: "Ուշադրություն"
      },
      caution: {
           boxClass: "border-red-500 bg-red-500/10",
           lineClass: "border-red-600",
           Icon: ShieldAlert,
           iconClass: "text-red-700",
-          title: "Զգուշացում"
      }
 }
 
@@ -71,17 +67,20 @@ export function Blockquote({children}: BlockquoteProps){
      const match = rawText.match(/^\[!(\w+)\]\s*(.*)/i);
      const bqType = (match ? (match[1] as BlockquoteVariant) : "").toLowerCase();
      const variant = bqType ? variantMap[bqType as BlockquoteVariant] : null;
+     const t = useTranslations("blockquote")
      return !variant ? (
           <blockquote className="mt-3.5 border-l-2 pl-6 italic text-sm md:text-base">{children}</blockquote>
      ) : (
-          <div aria-label={variant.title} className={cn(
+          <div aria-label={bqType ? t(bqType as BlockquoteVariant) : t("title")} className={cn(
                "mt-3.5 border-2 rounded-md shadow-sm transition-all duration-200 hover:shadow-md py-5 px-4 *:my-0 space-y-2 flex flex-col items-start",
-               variant.boxClass
+               bqType ? variant.boxClass : "border-l-muted-foreground"
           )}>
-               <span className={cn(
-                    "text-md sm:text-lg md:text-xl mb-3 font-semibold flex items-center gap-2 pb-2 border-b text-foreground",
-                    variant.lineClass
-               )}><variant.Icon className={variant.iconClass}/> {variant.title}</span>
+               {bqType && (
+                    <span className={cn(
+                         "text-md sm:text-lg md:text-xl mb-3 font-semibold flex items-center gap-2 pb-2 border-b text-foreground",
+                         variant.lineClass
+                    )}><variant.Icon className={variant.iconClass}/> {t(bqType as BlockquoteVariant)}</span>
+               )}
                {stripDirective(children)}
           </div>
      )

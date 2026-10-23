@@ -4,6 +4,7 @@ import { KEYWORDS } from "@/lib/constants";
 import { getAllSlugs, getExperimentBySlug, getRelatedExperiments } from "@/lib/helpers/experiments";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 interface SingleExperimentPageProps{
@@ -16,7 +17,7 @@ export const generateStaticParams = async() => {
   return allSlugs.map(slug => ({slug}))
 }
 
-export const generateMetadata = async({params}:SingleExperimentPageProps): Promise<Metadata> => {
+export const generateMetadata = async({params}: SingleExperimentPageProps): Promise<Metadata> => {
      const {slug} = await params;
      const currExperiment = await getExperimentBySlug(slug);
      if(!currExperiment) return notFound();
@@ -25,6 +26,7 @@ export const generateMetadata = async({params}:SingleExperimentPageProps): Promi
           thumbnail: currExperiment.thumbnail,
           date: currExperiment.date
      })
+     const t = await getTranslations("site.title")
      return {
           title: currExperiment.title,
           description: currExperiment.description,
@@ -39,7 +41,7 @@ export const generateMetadata = async({params}:SingleExperimentPageProps): Promi
                title: currExperiment.title,
                description: currExperiment.description,
                url: absoluteURL(`/experiments/${slug}`),
-               siteName: "Գիտաֆիզիկա",
+               siteName: t("short"),
                type: "article",
                images: {
                     url: absoluteURL(`/api/og?${ogSearchParams.toString()}`),

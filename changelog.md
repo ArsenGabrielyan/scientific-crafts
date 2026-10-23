@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 ## 1.0.2 - Unreleased
+### Added Core Languages
+- **🇦🇲 Armenian (Հայերեն)** - Original base Language
+- **🇺🇸 English** - Translation
+- **🇷🇺 Russian (Русский)** - Translation
 ### Added
 - Clear Filters button on the search box
 - Sort by date (Newest / Oldest)
