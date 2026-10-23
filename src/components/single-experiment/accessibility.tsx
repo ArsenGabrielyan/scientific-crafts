@@ -4,20 +4,22 @@ import { Button } from "@/components/ui/button";
 import type { SingleExperimentComponentProps } from "@/lib/types/experiment";
 import { absoluteURL, getErrorMessage } from "@/lib/utils";
 import { Share2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 export default function ExperimentAccessibility({experiment, slug}: SingleExperimentComponentProps & {
      slug: string
 }){
+     const t = useTranslations("experiments")
      const shareExperiment = async() => {
           try{
                await navigator.share({
                     title: experiment.title,
                     url: absoluteURL(`/experiments/${slug}`)
                })
-               toast.success("Գիտափորձը հաջողությամբ կիսվել է")
+               toast.success(t("share.success"))
           } catch (err: unknown) {
-               toast.error("Չհաջողվեց կիսվել գիտական փորձը",{
+               toast.error(t("share.error"),{
                     description: getErrorMessage(err)
                });
           }
@@ -27,11 +29,11 @@ export default function ExperimentAccessibility({experiment, slug}: SingleExperi
                <Breadcrumb className="w-3/5">
                     <BreadcrumbList className="text-xs sm:text-sm">
                          <BreadcrumbItem>
-                              <BreadcrumbLink href={absoluteURL("/")}>Գլխավոր</BreadcrumbLink>
+                              <BreadcrumbLink href={absoluteURL("/")}>{t("breadcrumb.main")}</BreadcrumbLink>
                          </BreadcrumbItem>
                          <BreadcrumbSeparator/>
                          <BreadcrumbItem>
-                              <BreadcrumbLink href={absoluteURL("/experiments")}>Գիտական փորձեր</BreadcrumbLink>
+                              <BreadcrumbLink href={absoluteURL("/experiments")}>{t("breadcrumb.experiments")}</BreadcrumbLink>
                          </BreadcrumbItem>
                          <BreadcrumbSeparator/>
                          <BreadcrumbItem>
@@ -39,7 +41,7 @@ export default function ExperimentAccessibility({experiment, slug}: SingleExperi
                          </BreadcrumbItem>
                     </BreadcrumbList>
                </Breadcrumb>
-               <Button variant="secondary" title="Կիսվել այս փորձը" size="icon" onClick={shareExperiment}>
+               <Button variant="secondary" title={t("share.title")} size="icon" onClick={shareExperiment}>
                     <Share2/>
                </Button>
           </div>

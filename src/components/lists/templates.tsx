@@ -2,19 +2,21 @@ import type { Template } from "@/lib/types";
 import TemplateCard from "../cards/template";
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "../ui/empty";
 import { Scissors } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface TemplatesListProps{
      templates: Template[]
 }
 export default function TemplatesList({templates}: TemplatesListProps){
+     const t = useTranslations("templates.empty")
      return templates.length === 0 ? (
           <Empty>
                <EmptyHeader>
                     <EmptyMedia variant="icon">
                          <Scissors/>
                     </EmptyMedia>
-                    <EmptyTitle>Շաբլոններ չկան</EmptyTitle>
-                    <EmptyDescription>Այս պահին շաբլոնները դեռ չեն հրապարակվել</EmptyDescription>
+                    <EmptyTitle>{t("title")}</EmptyTitle>
+                    <EmptyDescription>{t("desc")}</EmptyDescription>
                </EmptyHeader>
           </Empty>
      ) : (

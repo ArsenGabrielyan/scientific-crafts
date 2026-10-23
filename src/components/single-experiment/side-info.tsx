@@ -4,13 +4,15 @@ import { PlayCircle } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export default function ExperimentSideInfo({experiment}: SingleExperimentComponentProps){
+     const t = useTranslations("experiments.side-info")
      return (
           <div className="space-y-4 relative lg:sticky mb-3 lg:mb-0 top-0 lg:top-21.25 h-fit">
                {experiment.requirements.length !== 0 && (
                     <>
-                         <h2 className="text-xl md:text-2xl lg:text-[27px] font-semibold border-b border-primary pb-1 mb-4 w-fit">Ձեզ անհրաժեշտ են</h2>
+                         <h2 className="text-xl md:text-2xl lg:text-[27px] font-semibold border-b border-primary pb-1 mb-4 w-fit">{t("requirements")}</h2>
                          <ul className="list-disc pl-5 space-y-2 marker:text-primary">
                               {experiment.requirements.map((req,i)=>(
                                    <li key={`req-${i+1}`}>{req}</li>
@@ -25,7 +27,9 @@ export default function ExperimentSideInfo({experiment}: SingleExperimentCompone
                          href={experiment.videoUrl}
                          target="_blank"
                          rel="noopener noreferrer nofollow"
-                         aria-label={`Դիտել ${experiment.title} տեսանյութը`}
+                         aria-label={t("watch-video",{
+                              title: experiment.title
+                         })}
                          className="block group relative w-full"
                     >
                          <Image

@@ -5,8 +5,10 @@ import { Calendar, Clock, Edit, FlaskConical, ShieldAlert, ShieldCheck, TestTube
 import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { EXPERIMENT_FILTER_NAMES } from "@/lib/constants/filters";
+import { useTranslations } from "next-intl";
 
 export default function ExperimentHeader({experiment}: SingleExperimentComponentProps){
+     const t = useTranslations("experiments.safety")
      return (
           <section className="w-full min-h-[56dvh] flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background px-4">
                <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360 text-center">
@@ -54,7 +56,7 @@ export default function ExperimentHeader({experiment}: SingleExperimentComponent
                                         )}
                                    </TooltipTrigger>
                                    <TooltipContent>
-                                        {experiment.selfGuided ? "Կարելի է կատարել ինքնուրույն" : "Մեծահասակի հսկողությունը պարտադիր է"}
+                                        {experiment.selfGuided ? t("self-guided") : t("adult-supervision")}
                                    </TooltipContent>
                               </Tooltip>
                          </li>

@@ -2,19 +2,21 @@ import type { ExperimentMetadata } from "@/lib/types/experiment";
 import ExperimentCard from "../cards/experiment";
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "../ui/empty";
 import { FlaskConical } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface ExperimentsListProps{
      experiments: ExperimentMetadata[]
 }
 export default function ExperimentsList({experiments}: ExperimentsListProps){
+     const t = useTranslations("experiments.empty")
      return experiments.length===0 ? (
           <Empty>
                <EmptyHeader>
                     <EmptyMedia variant="icon">
                          <FlaskConical/>
                     </EmptyMedia>
-                    <EmptyTitle>Գիտափորձեր չկան</EmptyTitle>
-                    <EmptyDescription>Այս պահին գիտական փորձերը դեռ չեն հրապարակվել</EmptyDescription>
+                    <EmptyTitle>{t("title")}</EmptyTitle>
+                    <EmptyDescription>{t("desc")}</EmptyDescription>
                </EmptyHeader>
           </Empty>
      ) : (

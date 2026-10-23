@@ -61,6 +61,7 @@ export interface PaginationWithLinksProps {
  */
 
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 
 export default function PaginationWithLinks(
   props: PaginationWithLinksProps
@@ -199,6 +200,7 @@ function PaginationWithLinksInner({
 
     return items;
   };
+  const t = useTranslations("pagination")
   return (
     <div className="flex flex-col md:flex-row items-center gap-3 w-full">
       {pageSizeSelectOptions && (
@@ -228,7 +230,7 @@ function PaginationWithLinksInner({
                     ? "pointer-events-none opacity-50"
                     : "cursor-pointer"
                 )}
-                text="Նախորդը"
+                text={t("prev")}
               />
             ) : (
               <PaginationPrevious
@@ -238,7 +240,7 @@ function PaginationWithLinksInner({
                 className={
                   page === 1 ? "pointer-events-none opacity-50" : undefined
                 }
-                text="Նախորդը"
+                text={t("prev")}
               />
             )}
           </PaginationItem>
@@ -256,7 +258,7 @@ function PaginationWithLinksInner({
                     ? "pointer-events-none opacity-50"
                     : "cursor-pointer"
                 )}
-                text="Հաջորդը"
+                text={t("next")}
               />
             ) : (
               <PaginationNext
@@ -268,7 +270,7 @@ function PaginationWithLinksInner({
                     ? "pointer-events-none opacity-50"
                     : undefined
                 }
-                text="Հաջորդը"
+                text={t("next")}
               />
             )}
           </PaginationItem>
@@ -287,12 +289,13 @@ function SelectRowsPerPage({
   setPageSize: (newSize: number) => void;
   pageSize: number;
 }) {
+  const t = useTranslations("pagination.page-size")
   return (
     <div className="flex items-center gap-4">
-      <span className="whitespace-nowrap text-sm">Էջի չափը</span>
+      <span className="whitespace-nowrap text-sm">{t("label")}</span>
       <Select value={String(pageSize)} onValueChange={(value) => setPageSize(Number(value))}>
         <SelectTrigger>
-          <SelectValue placeholder="Ընտրել էջի չափը">
+          <SelectValue placeholder={t("placeholder")}>
             {String(pageSize)}
           </SelectValue>
         </SelectTrigger>
