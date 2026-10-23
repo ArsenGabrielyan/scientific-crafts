@@ -35,5 +35,10 @@
     "important": "Important",
     "warning": "Warning",
     "caution": "Caution"
+  },
+  "about": {
+    "title": "About Us",
+    "line1": "<bold>Scientific Crafts</bold> is an independent scientific project created to make science engaging and accessible to a broad audience through hands-on experiments. It features videos of experiments, detailed guides, and downloadable templates covering physics, chemistry, STEM, and related topics.",
+    "line2": "The project began in 2018 as a video series of scientific experiments and is now expanding into an interactive web platform, bringing experiments, explanations, and templates together in one accessible place." 
   }
 }
