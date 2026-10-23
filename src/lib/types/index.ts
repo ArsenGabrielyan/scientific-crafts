@@ -28,3 +28,14 @@ export interface IBlockquoteBox{
 }
 export type SearchPageMode = "search-template" | "search-page"
 export type SortType = "newest" | "oldest"
+export enum HeaderLink{
+     Main = "main",
+     About = "about",
+     Templates = "templates",
+     Experiments = "experiments"
+}
+export interface IHeaderLink{
+     alias: HeaderLink,
+     link: string,
+     Icon: LucideIcon
+}
