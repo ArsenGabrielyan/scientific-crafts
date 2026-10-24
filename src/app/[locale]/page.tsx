@@ -1,13 +1,14 @@
 import MainContent from "@/contents/main";
 import { getAllExperiments } from "@/lib/helpers/experiments";
-import { getAllTemplates } from "@/lib/helpers/templates";
+import { getAllTemplates, validateLocale } from "@/lib/helpers";
 
 export const revalidate = 86400;
 
-export default async function Home() {
+export default async function Home({params}: LayoutProps<"/[locale]">) {
+  const {locale} = await params
   const [templates, experiments] = await Promise.all([
     getAllTemplates(),
-    getAllExperiments()
+    getAllExperiments(validateLocale(locale))
   ])
   return (
     <MainContent

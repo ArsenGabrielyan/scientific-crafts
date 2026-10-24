@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/themes/provider";
 import { KEYWORDS } from "@/lib/constants/keywords";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { validateLocale } from "@/lib/helpers";
 
 const geistHeading = Geist({subsets:['latin'],variable:'--font-heading'});
 
@@ -22,51 +23,53 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const generateMetadata = async(): Promise<Metadata> => {
+export const generateMetadata = async({params}: LayoutProps<"/[locale]">): Promise<Metadata> => {
+  const {locale: rawLocale} = await params;
   const t = await getTranslations("site")
+  const locale = validateLocale(rawLocale)
   return {
     metadataBase: new URL(absoluteURL()),
-      title: {
-        absolute: t("title.absolute"),
-        template: t("title.template")
-      },
+    title: {
+      absolute: t("title.absolute"),
+      template: t("title.template")
+    },
+    description: t("desc"),
+    alternates: createMetaAlternates(locale),
+    authors: {
+      url: "https://github.com/ArsenGabrielyan",
+      name: t("author")
+    },
+    applicationName: t("title.short"),
+    icons: {
+      icon: [
+        { url: "/favicon.ico", type: "image/x-icon", rel: "shortcut icon"},
+        { url: "/app-icon.png", sizes: "192x192", type: "image/png" },
+      ],
+      apple: "/app-icon.png"
+    },
+    keywords: KEYWORDS,
+    openGraph: {
+      title: t("title.absolute"),
       description: t("desc"),
-      alternates: createMetaAlternates(),
-      authors: {
-        url: "https://github.com/ArsenGabrielyan",
-        name: t("author")
-      },
-      applicationName: t("title.short"),
-      icons: {
-        icon: [
-          { url: "/favicon.ico", type: "image/x-icon", rel: "shortcut icon"},
-          { url: "/app-icon.png", sizes: "192x192", type: "image/png" },
-        ],
-        apple: "/app-icon.png"
-      },
-      keywords: KEYWORDS,
-      openGraph: {
-        title: t("title.absolute"),
-        description: t("desc"),
-        url: absoluteURL(),
-        siteName: t("title.short"),
-        type: "website",
-        images: {
-          url: absoluteURL("/og-image.png"),
-          width: 1200,
-          height: 630
-        }
-      },
-      twitter: {
-        title: t("title.absolute"),
-        description: t("desc"),
-        card: "summary_large_image",
-        images: [{
-          url: absoluteURL("/og-image.png"),
-          width: 1200,
-          height: 630
-        }]
+      url: absoluteURL(),
+      siteName: t("title.short"),
+      type: "website",
+      images: {
+        url: absoluteURL("/og-image.png"),
+        width: 1200,
+        height: 630
       }
+    },
+    twitter: {
+      title: t("title.absolute"),
+      description: t("desc"),
+      card: "summary_large_image",
+      images: [{
+        url: absoluteURL("/og-image.png"),
+        width: 1200,
+        height: 630
+      }]
+    },
   }
 };
 

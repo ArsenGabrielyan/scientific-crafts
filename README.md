@@ -57,7 +57,7 @@ The project began in 2018 as a video series of science experiments, and is now e
 - [![React][react-shield]][react-url]
 
 ### Planned Improvements
-- [ ] I18N Support
+- [X] I18N Support
 - [X] Sort by date (Newest / Oldest)
   - Experiments page
   - Templates page

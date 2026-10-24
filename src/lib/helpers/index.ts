@@ -1,6 +1,10 @@
 import type { Template } from "@/lib/types";
 import { absoluteCDN } from "../utils"
 import { cache } from "react";
+import { LangCodeType } from "@/i18n/types";
+import { hasLocale } from "next-intl";
+import { routing } from "@/i18n/routing";
+import { defaultLocale } from "@/i18n/config";
 
 export const getAllTemplates = cache(async (): Promise<Template[]> => {
      try {
@@ -16,3 +20,5 @@ export const getAllTemplates = cache(async (): Promise<Template[]> => {
           return []
      }
 })
+export const validateLocale = (locale: string): LangCodeType => hasLocale(routing.locales,locale) ? locale : "hy"
+export const localePath = (locale: LangCodeType, pathname = "") =>`${locale === defaultLocale ? "" : `/${locale}`}${pathname}`

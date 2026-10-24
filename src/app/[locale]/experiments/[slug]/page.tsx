@@ -1,6 +1,7 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import SingleExperimentContent from "@/contents/single-experiment";
 import { KEYWORDS } from "@/lib/constants/keywords";
+import { validateLocale } from "@/lib/helpers";
 import { getAllSlugs, getExperimentBySlug, getRelatedExperiments } from "@/lib/helpers/experiments";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 import { Metadata } from "next";
@@ -8,18 +9,24 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 interface SingleExperimentPageProps{
-  params: Promise<{slug: string}>
+  params: Promise<{slug: string, locale: string}>
 }
 export const revalidate = 86400
 
-export const generateStaticParams = async() => {
-  const allSlugs = await getAllSlugs(20);
-  return allSlugs.map(slug => ({slug}))
+export const generateStaticParams = async ({
+     params: { locale: rawLocale }
+}: {
+     params: { locale: string }
+}) => {
+     const locale = validateLocale(rawLocale);
+     const allSlugs = await getAllSlugs(locale,50);
+     return allSlugs.map(slug => ({slug}))
 }
 
 export const generateMetadata = async({params}: SingleExperimentPageProps): Promise<Metadata> => {
-     const {slug} = await params;
-     const currExperiment = await getExperimentBySlug(slug);
+     const {slug, locale: rawLocale} = await params;
+     const locale = validateLocale(rawLocale);
+     const currExperiment = await getExperimentBySlug(locale,slug);
      if(!currExperiment) return notFound();
      const ogSearchParams = new URLSearchParams({
           title: currExperiment.title,
@@ -59,15 +66,16 @@ export const generateMetadata = async({params}: SingleExperimentPageProps): Prom
                     height: 630
                }]
           },
-          alternates: createMetaAlternates(`/experiments/${slug}`)
+          alternates: createMetaAlternates(locale,`/experiments/${slug}`)
      }
 }
 
 export default async function SingleExperimentPage({params}: SingleExperimentPageProps){
-     const {slug} = await params
-     const currExperiment = await getExperimentBySlug(slug);
+     const {slug, locale: rawLocale} = await params;
+     const locale = validateLocale(rawLocale);
+     const currExperiment = await getExperimentBySlug(locale,slug);
      if(!currExperiment) notFound();
-     const relatedExperiments = await getRelatedExperiments(slug, currExperiment.tags)
+     const relatedExperiments = await getRelatedExperiments(locale,slug, currExperiment.tags)
      return (
           <TooltipProvider>
                <SingleExperimentContent

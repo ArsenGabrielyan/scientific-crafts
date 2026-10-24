@@ -3,15 +3,16 @@ import {promises as fs} from "fs";
 import path from "path";
 import { cache } from "react";
 import type { Experiment, ExperimentMetadata } from "@/lib/types/experiment";
+import { LangCodeType } from "@/i18n/types";
 
 const MAX_RELATED_EXPERIMENTS = 4
 const experimentsFolder = path.join(process.cwd(), "src", "experiments");
 
-export const getAllExperiments = cache(async(): Promise<ExperimentMetadata[]> => {
-     const files = await fs.readdir(experimentsFolder);
+export const getAllExperiments = cache(async(locale: LangCodeType): Promise<ExperimentMetadata[]> => {
+     const files = await fs.readdir(path.join(experimentsFolder, locale));
      const experiments = await Promise.all(
           files.map(async file =>{
-               const blog = await getExperimentBySlug(path.parse(file).name.replace(".mdx", ""))
+               const blog = await getExperimentBySlug(locale,path.parse(file).name.replace(".mdx", ""))
                if(!blog) return null
                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                const {content, ...rest} = blog;
@@ -24,9 +25,9 @@ export const getAllExperiments = cache(async(): Promise<ExperimentMetadata[]> =>
           return bDate.getTime() - aDate.getTime()
      });
 })
-export const getExperimentBySlug = cache(async(slug: string): Promise<Experiment | null> => {
+export const getExperimentBySlug = cache(async(locale: LangCodeType, slug: string): Promise<Experiment | null> => {
      try {
-          const fullPath = path.join(experimentsFolder, `${slug}.mdx`);
+          const fullPath = path.join(experimentsFolder, locale, `${slug}.mdx`);
           const contents = await fs.readFile(fullPath, "utf8");
           const { data: frontmatter, content } = matter(contents) as unknown as {data: ExperimentMetadata, content: string}
           return {
@@ -51,8 +52,8 @@ export const getExperimentBySlug = cache(async(slug: string): Promise<Experiment
           return null;
      }
 })
-export const getRelatedExperiments = cache(async(currentSlug: string, tags: string[]): Promise<ExperimentMetadata[]> => {
-     const experiments = await getAllExperiments()
+export const getRelatedExperiments = cache(async(locale: LangCodeType, currentSlug: string, tags: string[]): Promise<ExperimentMetadata[]> => {
+     const experiments = await getAllExperiments(locale)
      const related = experiments.filter(experiment => experiment.slug !== currentSlug && experiment.tags.some(tag => tags.includes(tag)));
      const seen = new Set<string>();
      return related.filter(p => {
@@ -61,11 +62,11 @@ export const getRelatedExperiments = cache(async(currentSlug: string, tags: stri
           return true;
      }).slice(0, MAX_RELATED_EXPERIMENTS);
 })
-export const getAllTags = cache(async(limit?: number) => {
-     const experiments = await getAllExperiments();
+export const getAllTags = cache(async(locale: LangCodeType, limit?: number) => {
+     const experiments = await getAllExperiments(locale);
      return [...new Set(experiments.flatMap(experiment => experiment.tags))].slice(0, limit);
 });
-export const getAllSlugs = cache(async(limit?: number) => {
-     const experiments = await getAllExperiments()
+export const getAllSlugs = cache(async(locale: LangCodeType, limit?: number) => {
+     const experiments = await getAllExperiments(locale)
      return experiments.map(experiment=>experiment.slug).slice(0,limit)
 })

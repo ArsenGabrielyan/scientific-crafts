@@ -1,5 +1,6 @@
 import ExperimentsMainContent from "@/contents/experiments";
 import { EXPERIMENT_FILTER_NAMES } from "@/lib/constants";
+import { validateLocale } from "@/lib/helpers";
 import { getAllExperiments, getAllTags } from "@/lib/helpers/experiments";
 import type { ExperimentDifficulty, ExperimentDuration, ExperimentFilterName } from "@/lib/types";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
@@ -7,7 +8,7 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 interface ExperimentSearchProps{
-     params: Promise<{query: string}>
+     params: Promise<{query: string, locale: string}>
      searchParams: Promise<{
           page?: string;
           pageSize?: string;
@@ -17,17 +18,24 @@ interface ExperimentSearchProps{
           selfGuided?: string
      }>;
 }
-export const generateStaticParams = async() => {
-     const allTags = await getAllTags(10);
-     return allTags.map(query=>({query}))
+export const generateStaticParams = async ({
+     params: { locale: rawLocale }
+}: {
+     params: { locale: string }
+}) => {
+     const locale = validateLocale(rawLocale)
+     const allTags = await getAllTags(locale, 20)
+
+     return allTags.map(query => ({ query }))
 }
 export const revalidate = 86400
 
 export async function generateMetadata({params, searchParams}: ExperimentSearchProps): Promise<Metadata>{
-     const [{query},search, result] = await Promise.all([
-          params,
+     const {query, locale: rawLocale} = await params;
+     const locale = validateLocale(rawLocale);
+     const [search, result] = await Promise.all([
           searchParams,
-          getAllExperiments()
+          getAllExperiments(locale)
      ]);
      const allowedPageSizes = [4,8,16,24,32,48];
      const requestedPageSize = Number(search.pageSize);
@@ -49,17 +57,18 @@ export async function generateMetadata({params, searchParams}: ExperimentSearchP
                total: totalResults
           }),
           pagination: {
-               previous: currPage > 1 ? absoluteURL(`/templates/${queryDecoded}?page=${currPage - 1}`) : undefined,
-               next: currPage < totalPages ? absoluteURL(`/templates/${queryDecoded}?page=${currPage + 1}`) : undefined
+               previous: currPage > 1 ? absoluteURL(`/search/${queryDecoded}?page=${currPage - 1}`) : undefined,
+               next: currPage < totalPages ? absoluteURL(`/search/${queryDecoded}?page=${currPage + 1}`) : undefined
           },
-          alternates: createMetaAlternates(`/search/${queryDecoded}`)
+          alternates: createMetaAlternates(locale,`/search/${queryDecoded}`)
      }
 }
 export default async function ExperimentSearch({searchParams, params}: ExperimentSearchProps){
-     const [{query},search, result] = await Promise.all([
-          params,
+     const {query, locale: rawLocale} = await params;
+     const locale = validateLocale(rawLocale);
+     const [search, result] = await Promise.all([
           searchParams,
-          getAllExperiments()
+          getAllExperiments(locale)
      ]);
      const allowedPageSizes = [4,8,16,24,32,48];
      const requestedPageSize = Number(search.pageSize);

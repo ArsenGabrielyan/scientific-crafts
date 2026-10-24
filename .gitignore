@@ -44,6 +44,9 @@ next-env.d.ts
 public/rss.xml
 public/rss.json
 public/atom.xml
+public/*/rss.xml
+public/*/rss.json
+public/*/atom.xml
 
 # i18n files
 i18n/*.d.json.ts

@@ -1,12 +1,13 @@
 import { Metadata } from "next";
 import TemplatesMainContent from "../../../contents/templates";
-import { getAllTemplates } from "@/lib/helpers/templates";
+import { getAllTemplates, validateLocale } from "@/lib/helpers";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 import { SortType, TemplateFilterName } from "@/lib/types";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { TEMPLATE_FILTER_NAMES } from "@/lib/constants";
 
 interface PageProps {
+     params: Promise<{locale: string}>
      searchParams: Promise<{
           page?: string;
           pageSize?: string;
@@ -16,16 +17,17 @@ interface PageProps {
      }>;
 }
 
-export const generateMetadata = async({searchParams}: PageProps): Promise<Metadata> => {
+export const generateMetadata = async({searchParams, params}: PageProps): Promise<Metadata> => {
+     const {locale: rawLocale} = await params;
      const [search, result] = await Promise.all([
           searchParams,
           getAllTemplates()
      ]);
+     const locale = validateLocale(rawLocale);
      const allowedPageSizes = [4, 8, 16, 24];
      const requestedPageSize = Number(search.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
      const query = search.query?.trim().toLowerCase() ?? ""
-     const locale = await getLocale()
      const searchResults = result.filter(item =>!query || item.title[locale].includes(query))
      const totalResults = searchResults.length
      const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
@@ -38,23 +40,24 @@ export const generateMetadata = async({searchParams}: PageProps): Promise<Metada
                previous: currPage > 1 ? absoluteURL(`/templates?page=${currPage - 1}`) : undefined,
                next: currPage < totalPages ? absoluteURL(`/templates?page=${currPage + 1}`) : undefined
           },
-          alternates: createMetaAlternates("/templates")
+          alternates: createMetaAlternates(locale,"/templates")
      }
 }
 
 export const revalidate = 86400;
 
-export default async function TemplatesMainPage({ searchParams }: PageProps){
-     const [params, result] = await Promise.all([
+export default async function TemplatesMainPage({ searchParams, params }: PageProps){
+     const {locale: rawLocale} = await params;
+     const [search, result] = await Promise.all([
           searchParams,
           getAllTemplates()
      ]);
-     const locale = await getLocale()
+     const locale = validateLocale(rawLocale);
      const allowedPageSizes = [4, 8, 16, 24];
-     const requestedPageSize = Number(params.pageSize);
+     const requestedPageSize = Number(search.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
-     const category = params.category && TEMPLATE_FILTER_NAMES.includes(params.category) ? params.category as TemplateFilterName : undefined
-     const query = params.query?.trim().toLowerCase() ?? ""
+     const category = search.category && TEMPLATE_FILTER_NAMES.includes(search.category) ? search.category as TemplateFilterName : undefined
+     const query = search.query?.trim().toLowerCase() ?? ""
      const searchResults = result.filter(item =>!query || item.title[locale].toLowerCase().includes(query))
      const filteredTemplates = searchResults.filter(item =>!category || item.categories.includes(category))
      const categoryCounts = Object.fromEntries(
@@ -63,7 +66,7 @@ export default async function TemplatesMainPage({ searchParams }: PageProps){
                searchResults.filter(item =>item.categories.includes(category)).length
           ])
      ) as Record<TemplateFilterName, number>
-     const sort: SortType = params.sort === "oldest" ? "oldest" : "newest"
+     const sort: SortType = search.sort === "oldest" ? "oldest" : "newest"
      const sortedTemplates = [...filteredTemplates].sort((a, b) =>
           sort === "oldest"
                ? new Date(a.date).getTime() - new Date(b.date).getTime()
@@ -71,7 +74,7 @@ export default async function TemplatesMainPage({ searchParams }: PageProps){
      )
      const totalResults = sortedTemplates.length
      const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
-     const currPage = Math.min(Math.max(Number(params.page) || 1, 1),totalPages)
+     const currPage = Math.min(Math.max(Number(search.page) || 1, 1),totalPages)
      const start = (currPage - 1) * pageSize
      const templates = sortedTemplates.slice(start, start + pageSize)
      return (
@@ -83,7 +86,7 @@ export default async function TemplatesMainPage({ searchParams }: PageProps){
                totalResults={totalResults}
                allCount={searchResults.length}
                initialCategory={category}
-               initialQuery={params.query}
+               initialQuery={search.query}
                initialSort={sort}
           />
      )
