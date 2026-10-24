@@ -2,12 +2,11 @@ import { Button } from "@/components/ui/button";
 import { PlayCircle, RssIcon } from "lucide-react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export default function HeroSection(){
      const t = useTranslations("site");
      const btnTxt = useTranslations("buttons");
-     const locale = useLocale();
      return (
           <section id="hero" className="w-full min-h-dvh flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background scroll-mt-5 px-4">
                <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360 text-center md:text-left">
@@ -25,7 +24,7 @@ export default function HeroSection(){
                               </Link>
                          </Button>
                          <Button variant="outline" size="icon" title={btnTxt("follow-us")} asChild>
-                              <Link href={locale==="hy" ? "/rss.xml" : `/${locale}/rss.xml`} target="_blank" rel="noopener nofollow noreferrer">
+                              <Link href="/rss.xml" target="_blank" rel="noopener nofollow noreferrer">
                                    <RssIcon/>
                               </Link>
                          </Button>
