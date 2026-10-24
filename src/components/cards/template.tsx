@@ -6,7 +6,7 @@ import type { Template } from "@/lib/types";
 import { absoluteCDN } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
 import { Calendar, Download } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface TemplateCardProps{
      data: Template
@@ -14,6 +14,7 @@ interface TemplateCardProps{
 export default function TemplateCard({data}: TemplateCardProps){
      const t = useTranslations("templates");
      const btnTxt = useTranslations("buttons")
+     const locale = useLocale();
      return (
           <Card className="relative mx-auto w-full max-w-sm pt-0">
                <Image
@@ -29,7 +30,7 @@ export default function TemplateCard({data}: TemplateCardProps){
                               count: data.pages
                          })}</Badge>
                     </CardAction>
-                    <CardTitle>{data.title}</CardTitle>
+                    <CardTitle>{data.title[locale]}</CardTitle>
                     <CardDescription className="flex items-center gap-2">
                          <Calendar className="size-4"/>
                          {data.date}

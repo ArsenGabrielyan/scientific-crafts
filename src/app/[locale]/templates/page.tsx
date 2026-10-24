@@ -3,7 +3,7 @@ import TemplatesMainContent from "../../../contents/templates";
 import { getAllTemplates } from "@/lib/helpers/templates";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 import { SortType, TemplateFilterName } from "@/lib/types";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { TEMPLATE_FILTER_NAMES } from "@/lib/constants";
 
 interface PageProps {
@@ -25,7 +25,8 @@ export const generateMetadata = async({searchParams}: PageProps): Promise<Metada
      const requestedPageSize = Number(search.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
      const query = search.query?.trim().toLowerCase() ?? ""
-     const searchResults = result.filter(item =>!query || item.title.includes(query))
+     const locale = await getLocale()
+     const searchResults = result.filter(item =>!query || item.title[locale].includes(query))
      const totalResults = searchResults.length
      const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
      const currPage = Math.min(Math.max(Number(search.page) || 1, 1),totalPages)
@@ -48,12 +49,13 @@ export default async function TemplatesMainPage({ searchParams }: PageProps){
           searchParams,
           getAllTemplates()
      ]);
+     const locale = await getLocale()
      const allowedPageSizes = [4, 8, 16, 24];
      const requestedPageSize = Number(params.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
      const category = params.category && TEMPLATE_FILTER_NAMES.includes(params.category) ? params.category as TemplateFilterName : undefined
      const query = params.query?.trim().toLowerCase() ?? ""
-     const searchResults = result.filter(item =>!query || item.title.toLowerCase().includes(query))
+     const searchResults = result.filter(item =>!query || item.title[locale].toLowerCase().includes(query))
      const filteredTemplates = searchResults.filter(item =>!category || item.categories.includes(category))
      const categoryCounts = Object.fromEntries(
           TEMPLATE_FILTER_NAMES.map(category => [

@@ -2,6 +2,7 @@ import { LucideIcon } from "lucide-react";
 import * as z from "zod"
 import { getSearchSchema } from "../schemas"
 import { DIFFICULTIES, DURATIONS, EXPERIMENT_FILTER_NAMES, TEMPLATE_FILTER_NAMES } from "../constants";
+import { LangCodeType } from "@/i18n/types";
 
 export type SearchType = z.infer<
      Awaited<ReturnType<typeof getSearchSchema>>
@@ -14,7 +15,7 @@ export interface SelectType{
 }
 export interface Template {
      slug: string;
-     title: string;
+     title: Record<LangCodeType,string>;
      file: string;
      thumbnail: string;
      categories: TemplateFilterName[];
