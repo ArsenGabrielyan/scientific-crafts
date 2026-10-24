@@ -26,8 +26,8 @@ export default function LanguageSwitcher(){
           <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
                <DropdownMenuTrigger asChild>
                     <Button variant="outline" disabled={isPending} title={t("lang-switcher-label")}>
-                         <CircleFlag countryCode={currLang?.countryCode ?? "hy"} className="size-4"/>
-                         <span className='md:sr-only'>{currLang?.label ?? "Հայերեն"}</span>
+                         <CircleFlag countryCode={currLang?.countryCode ?? "us"} className="size-4"/>
+                         <span className='md:sr-only'>{currLang?.label ?? "English"}</span>
                          <ChevronDown className={cn(isOpen && "rotate-180","transition-all")}/>
                     </Button>
                </DropdownMenuTrigger>

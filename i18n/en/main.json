@@ -1,7 +1,88 @@
 {
+  "about": {
+    "line1": "<bold>Scientific Crafts</bold> is an independent scientific project created to make science engaging and accessible to a broad audience through hands-on experiments. It features videos of experiments, detailed guides, and downloadable templates covering physics, chemistry, STEM, and related topics.",
+    "line2": "The project began in 2018 as a video series of scientific experiments and is now expanding into an interactive web platform, bringing experiments, explanations, and templates together in one accessible place.",
+    "title": "About Us"
+  },
+  "blockquote": {
+    "caution": "Caution",
+    "important": "Important",
+    "note": "Note",
+    "tip": "Tip",
+    "title": "Blockquote",
+    "warning": "Warning"
+  },
+  "buttons": {
+    "clear-filters": "Clear filters",
+    "details": "More details",
+    "download": "Download",
+    "follow-us": "Follow us",
+    "learn-more": "Learn more",
+    "search": "Search",
+    "watch-playlist": "Watch the platlist"
+  },
   "experiments": {
+    "all": {
+      "original": "All",
+      "with-count": "All ({total, number})"
+    },
+    "breadcrumb": {
+      "experiments": "Science Experiments",
+      "main": "Home"
+    },
     "desc": "Here you'll discover more science experiments",
+    "difficulties": {
+      "intermediate": "Intermediate",
+      "master": "Master",
+      "starter": "Starter",
+      "title": "Difficulty"
+    },
+    "duration": {
+      "long": "1h+",
+      "medium": "15-30m",
+      "short": "<15m",
+      "title": "Duration"
+    },
+    "empty": {
+      "desc": "At this moment, the experiments have not yet been published.",
+      "title": "No experiments found"
+    },
+    "filters": {
+      "chemistry": "Chemistry",
+      "physics": "Physics"
+    },
+    "safety": {
+      "adult-supervision": "Adult supervision is mandatory.",
+      "self-guided": "It can be performed independently",
+      "title": "Self guided only"
+    },
+    "search": "Search for experiments...",
+    "share": {
+      "error": "Failed to share the experiment",
+      "success": "Experiment successfully shared",
+      "title": "Share this experiment"
+    },
+    "side-info": {
+      "requirements": "You'll need",
+      "watch-video": "Watch the video {title}"
+    },
+    "single-experiment": {
+      "keywords": "Keywords",
+      "related": "Related Experiments"
+    },
     "title": "Science Experiments"
+  },
+  "footer": {
+    "all-rights-reserved": "All rights reserved",
+    "github": "View on GitHub",
+    "youtube": "View on YouTube"
+  },
+  "links": {
+    "about": "About",
+    "experiments": "Experiments",
+    "main": "Home",
+    "menu": "Menu",
+    "templates": "Templates"
   },
   "not-found": {
     "back": "Go back",
@@ -9,43 +90,57 @@
     "page-title": "Page not found",
     "title": "Oops... The page is not found"
   },
+  "pagination": {
+    "next": "Next",
+    "page-size": {
+      "label": "Page size",
+      "placeholder": "Choose a page size"
+    },
+    "prev": "Previous"
+  },
   "search": {
     "desc": "Explore the {total, number} scientific experiments tagged with “{query}”",
-    "title": "The best {total, number} scientific experiments tagged \"{query}\" – Updated {year, number}"
+    "title": "The best {total, number} scientific experiments tagged \"{query}\" – Updated {year, number}",
+    "validation": {
+      "too-long": "The query is too short",
+      "too-short": "The query is too long"
+    }
   },
   "site": {
     "author": "Arsen G.",
     "desc": "Learn more about science, physics, chemistry, and STEM (science, technology, engineering, math) by testing lots of science experiments.",
+    "lang-switcher-label": "Change the language",
+    "theme-toggler-label": "Change theme",
     "title": {
       "absolute": "Scientific Crafts - Science, Physics, Chemistry, and more.",
       "short": "Scientific Crafts",
       "template": "%s | Scientific Crafts"
-    },
-    "lang-switcher-label": "Change the language",
-    "theme-toggler-label": "Change theme"
+    }
+  },
+  "sort": {
+    "newest": "By newest",
+    "oldest": "By oldest",
+    "title": {
+      "experiments": "Sort experiments",
+      "templates": "Sort templates"
+    }
   },
   "templates": {
+    "all": "All ({total, number})",
     "desc": "Special templates for doing science experiments",
+    "empty": {
+      "desc": "At this moment, the templates have not yet been published.",
+      "title": "No templates found"
+    },
+    "filters": {
+      "aerodynamics": "Aerodynamics",
+      "fluid-mechanics": "Fluid mechanics",
+      "optical-illusion": "Optical illusion",
+      "physics": "Physics",
+      "surface-chemistry": "Surface Chemistry"
+    },
+    "page": "{count, plural, one {# page} other {# pages}}",
+    "search": "Search templates...",
     "title": "Templates"
-  },
-  "blockquote": {
-    "title": "Blockquote",
-    "note": "Note",
-    "tip": "Tip",
-    "important": "Important",
-    "warning": "Warning",
-    "caution": "Caution"
-  },
-  "about": {
-    "title": "About Us",
-    "line1": "<bold>Scientific Crafts</bold> is an independent scientific project created to make science engaging and accessible to a broad audience through hands-on experiments. It features videos of experiments, detailed guides, and downloadable templates covering physics, chemistry, STEM, and related topics.",
-    "line2": "The project began in 2018 as a video series of scientific experiments and is now expanding into an interactive web platform, bringing experiments, explanations, and templates together in one accessible place." 
-  },
-  "links": {
-    "main": "Home",
-    "about": "About",
-    "templates": "Templates",
-    "experiments": "Experiments",
-    "menu": "Menu"
   }
 }

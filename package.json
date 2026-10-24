@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "tsx scripts/generate-rss.ts"
+    "postinstall": "tsx scripts/generate-rss.ts",
+    "i18n:missing-keys": "tsx scripts/missing-keys.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

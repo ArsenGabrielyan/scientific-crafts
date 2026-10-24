@@ -74,8 +74,7 @@
           "single-experiment": {
                "related": "Առնչվող փորձեր",
                "keywords": "Բանալի բառեր"
-          },
-          "error": "Չստացվեց բեռնել {slug} գիտափորձը"
+          }
      },
      "search": {
           "title": "«{query}» պիտակով նշված լավագույն {total, number} գիտական փորձեր - Թարմացված {year, number}թ․",
