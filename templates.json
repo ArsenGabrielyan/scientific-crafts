@@ -1,7 +1,11 @@
 [
      {
           "slug": "hologram",
-          "title": "Հոլոգրամ",
+          "title": {
+               "hy": "Հոլոգրամ",
+               "en": "Hologram",
+               "ru": "Голограмма"
+          },
           "file": "/pdf/hologram.pdf",
           "thumbnail": "/thumbnails/hologram.webp",
           "categories": ["physics", "optical-illusion"],
@@ -10,7 +14,11 @@
      },
      {
           "slug": "spinning-illusion",
-          "title": "Պտտվող պատրանք",
+          "title": {
+               "hy": "Պտտվող պատրանքներ",
+               "en": "Spinning illusions",
+               "ru": "Вращающиеся иллюзии"
+          },
           "file": "/pdf/spinning-illusion.pdf",
           "thumbnail": "/thumbnails/spinning-illusion.webp",
           "categories": ["physics", "optical-illusion"],
@@ -19,7 +27,11 @@
      },
      {
           "slug": "paper-helicopter",
-          "title": "Թղթե ուղղաթիռ",
+          "title": {
+               "hy": "Թղթե ուղղաթիռ",
+               "en": "Paper helicopter",
+               "ru": "Бумажный вертолётик"
+          },
           "file": "/pdf/paper-helicopter.pdf",
           "thumbnail": "/thumbnails/paper-helicopter.webp",
           "categories": ["physics", "aerodynamics"],
@@ -28,7 +40,11 @@
      },
      {
           "slug": "soap-boat",
-          "title": "Թղթե նավակ",
+          "title": {
+               "hy": "Թղթե նավակ",
+               "en": "Paper soap-powered boat",
+               "ru": "Бумажный кораблик, движимый мылом"
+          },
           "file": "/pdf/soap-boat.pdf",
           "thumbnail": "/thumbnails/soap-boat.webp",
           "categories": ["fluid-mechanics","surface-chemistry"],
@@ -37,7 +53,11 @@
      },
      {
           "slug": "flowers",
-          "title": "Բացվող ծաղիկ",
+          "title": {
+               "hy": "Բացվող ծաղիկ",
+               "en": "Blooming flowers",
+               "ru": "Цветущие цветы"
+          },
           "file": "/pdf/flowers.pdf",
           "thumbnail": "/thumbnails/flowers.webp",
           "categories": ["physics"],
