@@ -25,7 +25,7 @@ export default function HeroSection(){
                               </Link>
                          </Button>
                          <Button variant="outline" size="icon" title={btnTxt("follow-us")} asChild>
-                              <Link href={locale==="hy" ? "/rss.xml" : `/${locale}/rss.xml"`} target="_blank" rel="noopener nofollow noreferrer">
+                              <Link href={locale==="hy" ? "/rss.xml" : `/${locale}/rss.xml`} target="_blank" rel="noopener nofollow noreferrer">
                                    <RssIcon/>
                               </Link>
                          </Button>
