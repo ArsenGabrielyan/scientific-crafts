@@ -14,6 +14,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Sort by date (Newest / Oldest)
   - Experiments page
   - Templates page
+### Changed
+- Changed line clamping from 4 to 3
 ### New Experiments
 - Transparent flame
 - Whoosh Effect

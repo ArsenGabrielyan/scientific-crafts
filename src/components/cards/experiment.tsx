@@ -26,7 +26,7 @@ export default function ExperimentCard({data}: ExperimentCardProps){
                          <Badge variant="secondary">{t(data.categories[0])}</Badge>
                     </CardAction>
                     <CardTitle>{data.title}</CardTitle>
-                    <CardDescription className="line-clamp-4">{data.description}</CardDescription>
+                    <CardDescription className="line-clamp-3">{data.description}</CardDescription>
                </CardHeader>
                <CardFooter>
                     <Button className="w-full" asChild>
