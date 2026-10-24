@@ -5,7 +5,8 @@ import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 export default function HeroSection(){
-     const t = useTranslations("site")
+     const t = useTranslations("site");
+     const btnTxt = useTranslations("buttons")
      return (
           <section id="hero" className="w-full min-h-dvh flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background scroll-mt-5 px-4">
                <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360 text-center md:text-left">
@@ -14,15 +15,15 @@ export default function HeroSection(){
                     <p className="text-base md:text-lg text-muted-foreground">{t("desc")}</p>
                     <div className="flex flex-wrap items-center gap-2">
                          <Button asChild className="flex-1">
-                              <Link href="/#about">Իմանալ ավելին</Link>
+                              <Link href="/#about">{btnTxt("learn-more")}</Link>
                          </Button>
                          <Button variant="secondary" asChild className="flex-1">
                               <Link href="https://youtube.com/playlist?list=PLSI6KSDJfq-J6OxBprsyMjWmmLym2o7T3" target="_blank" rel="noopener noreferrer nofollow">
                                    <PlayCircle/>
-                                   Դիտել Փլեյլիստը
+                                   {btnTxt("watch-playlist")}
                               </Link>
                          </Button>
-                         <Button variant="outline" size="icon" title="Հետևիր մեզ" asChild>
+                         <Button variant="outline" size="icon" title={btnTxt("follow-us")} asChild>
                               <Link href="/rss.xml" target="_blank" rel="noopener nofollow noreferrer">
                                    <RssIcon/>
                               </Link>

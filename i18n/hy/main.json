@@ -1,4 +1,13 @@
 {
+     "buttons": {
+          "download": "Ներբեռնել",
+          "learn-more": "Իմանալ ավելին",
+          "details": "Մանրամասն",
+          "watch-playlist": "Դիտել փլեյլիստը",
+          "follow-us": "Հետևեք մեզ",
+          "search": "Որոնել",
+          "clear-filters": "Մաքրել ֆիլտրները"
+     },
      "site": {
           "title": {
                "absolute": "Գիտաֆիզիկա - Գիտություն, Ֆիզիկա, Քիմիա, և ոչ միայն։",
@@ -33,17 +42,48 @@
                "experiments": "Գիտական Փորձեր"
           },
           "safety": {
+               "title": "Միայն ինքնուրույն կատարվող",
                "self-guided": "Կարելի է կատարել ինքնուրույն",
                "adult-supervision": "Մեծահասակի հսկողությունը պարտադիր է"
           },
           "side-info": {
                "requirements": "Ձեզ անհրաժեշտ են",
                "watch-video": "Դիտել {title} տեսանյութը"
-          }
+          },
+          "difficulties": {
+               "title": "Բարդություն",
+               "starter": "Սկսնակ",
+               "intermediate": "Միջին",
+               "master": "Մասնագիտացված"
+          },
+          "duration": {
+               "title": "Տևողություն",
+               "short": "<15ր",
+               "medium": "15-30ր",
+               "long": "1ժ+"
+          },
+          "all": {
+               "original": "Բոլորը",
+               "with-count": "Բոլորը ({total, number})"
+          },
+          "filters": {
+               "physics": "Ֆիզիկա",
+               "chemistry": "Քիմիա"
+          },
+          "search": "Որոնել գիտական փորձեր...",
+          "single-experiment": {
+               "related": "Առնչվող փորձեր",
+               "keywords": "Բանալի բառեր"
+          },
+          "error": "Չստացվեց բեռնել {slug} գիտափորձը"
      },
      "search": {
           "title": "«{query}» պիտակով նշված լավագույն {total, number} գիտական փորձեր - Թարմացված {year, number}թ․",
-          "desc": "Ուսումնասիրեք «{query}» պիտակով նշված {total, number} գիտական փորձերը"
+          "desc": "Ուսումնասիրեք «{query}» պիտակով նշված {total, number} գիտական փորձերը",
+          "validation": {
+               "too-long": "Հարցումը շատ կարճ է",
+               "too-short": "Հարցումը շատ երկար է"
+          }
      },
      "templates": {
           "title": "Շաբլոններ",
@@ -51,7 +91,17 @@
           "empty": {
                "title": "Շաբլոններ չկան",
                "desc": "Այս պահին շաբլոնները դեռ չեն հրապարակվել։"
-          }
+          },
+          "page": "{count, number} էջ",
+          "filters": {
+               "physics": "Ֆիզիկա",
+               "optical-illusion": "Տեսողական պատրանք",
+               "aerodynamics": "Աերոդինամիկա",
+               "fluid-mechanics": "Հեղուկների մեխանիկա",
+               "surface-chemistry": "Մակերևութային քիմիա"
+          },
+          "search": "Որոնել շաբլոններ...",
+          "all": "Բոլորը ({total, number})"
      },
      "blockquote": {
           "title": "Մեջբերում",
@@ -85,5 +135,13 @@
                "label": "Էջի չափը",
                "placeholder": "Ընտրել էջի չափը"
           }
+     },
+     "sort": {
+          "title": {
+               "experiments": "Դասավորել գիտափորձերը",
+               "templates": "Դասավորել շաբլոնները"
+          },
+          "newest": "Նորից դեպի հնի",
+          "oldest": "Հնից դեպի նոր"
      }
 }

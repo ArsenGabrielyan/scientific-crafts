@@ -2,13 +2,11 @@
 import { Badge } from "@/components/ui/badge";
 import type { SingleExperimentComponentProps } from "@/lib/types/experiment";
 import { Calendar, Clock, Edit, FlaskConical, ShieldAlert, ShieldCheck, TestTube, TestTubes } from "lucide-react";
-import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { EXPERIMENT_FILTER_NAMES } from "@/lib/constants/filters";
 import { useTranslations } from "next-intl";
 
 export default function ExperimentHeader({experiment}: SingleExperimentComponentProps){
-     const t = useTranslations("experiments.safety")
+     const t = useTranslations("experiments")
      return (
           <section className="w-full min-h-[56dvh] flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background px-4">
                <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360 text-center">
@@ -17,7 +15,7 @@ export default function ExperimentHeader({experiment}: SingleExperimentComponent
                     {experiment.categories.length !== 0 && (
                          <div className="flex items-center gap-2 flex-wrap">
                               {experiment.categories.map(category=>(
-                                   <Badge key={category.toLowerCase()}>{EXPERIMENT_FILTER_NAMES[category]}</Badge>
+                                   <Badge key={category.toLowerCase()}>{t(`filters.${category}`)}</Badge>
                               ))}
                          </div>
                     )}
@@ -34,7 +32,7 @@ export default function ExperimentHeader({experiment}: SingleExperimentComponent
                          )}
                          <li className="flex items-center flex-col md:flex-row justify-center gap-2 flex-wrap text-sm md:text-base">
                               <Clock className="size-5 text-muted-foreground"/>
-                              {DURATIONS[experiment.duration]}
+                              {t(`duration.${experiment.duration}`)}
                          </li>
                          <li className="flex items-center flex-col md:flex-row justify-center gap-2 flex-wrap text-sm md:text-base">
                               {experiment.difficulty==="starter" ? (
@@ -44,7 +42,7 @@ export default function ExperimentHeader({experiment}: SingleExperimentComponent
                               ) : (
                                    <FlaskConical className="size-5 text-muted-foreground"/>
                               )}
-                              {DIFFICULTIES[experiment.difficulty]}
+                              {t(`difficulties.${experiment.difficulty}`)}
                          </li>
                          <li className="flex items-center flex-col md:flex-row justify-center gap-2 flex-wrap flex-1 text-sm md:text-base">
                               <Tooltip>
@@ -56,7 +54,7 @@ export default function ExperimentHeader({experiment}: SingleExperimentComponent
                                         )}
                                    </TooltipTrigger>
                                    <TooltipContent>
-                                        {experiment.selfGuided ? t("self-guided") : t("adult-supervision")}
+                                        {experiment.selfGuided ? t("safety.self-guided") : t("safety.adult-supervision")}
                                    </TooltipContent>
                               </Tooltip>
                          </li>

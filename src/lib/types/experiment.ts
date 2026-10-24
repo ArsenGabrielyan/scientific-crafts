@@ -1,5 +1,5 @@
 
-import { ExperimentFilterName } from "../constants/filters";
+import { ExperimentFilterName } from "../types";
 
 export interface ExperimentMetadata {
      title: string

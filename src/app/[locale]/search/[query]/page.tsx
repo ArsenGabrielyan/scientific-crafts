@@ -1,7 +1,7 @@
 import ExperimentsMainContent from "@/contents/experiments";
-import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
-import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
+import { EXPERIMENT_FILTER_NAMES } from "@/lib/constants";
 import { getAllExperiments, getAllTags } from "@/lib/helpers/experiments";
+import type { ExperimentDifficulty, ExperimentDuration, ExperimentFilterName } from "@/lib/types";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -12,8 +12,8 @@ interface ExperimentSearchProps{
           page?: string;
           pageSize?: string;
           category?: ExperimentFilterName
-          difficulty?: keyof typeof DIFFICULTIES
-          duration?: keyof typeof DURATIONS
+          difficulty?: ExperimentDifficulty
+          duration?: ExperimentDuration
           selfGuided?: string
      }>;
 }

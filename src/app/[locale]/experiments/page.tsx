@@ -1,10 +1,9 @@
 import { Metadata } from "next"
 import ExperimentsMainContent from "../../../contents/experiments"
 import { getAllExperiments } from "@/lib/helpers/experiments";
-import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
-import { DIFFICULTIES, DURATIONS } from "@/lib/constants";
+import { EXPERIMENT_FILTER_NAMES } from "@/lib/constants";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
-import { SortType } from "@/lib/types";
+import type { ExperimentDifficulty, ExperimentDuration, SortType, ExperimentFilterName } from "@/lib/types";
 import { getTranslations } from "next-intl/server";
 
 interface PageProps {
@@ -13,8 +12,8 @@ interface PageProps {
           pageSize?: string;
           query?: string,
           category?: ExperimentFilterName
-          difficulty?: keyof typeof DIFFICULTIES
-          duration?: keyof typeof DURATIONS
+          difficulty?: ExperimentDifficulty
+          duration?: ExperimentDuration
           selfGuided?: string,
           sort?: SortType
      }>;
@@ -55,7 +54,7 @@ export default async function ExperimentsMainPage({ searchParams }: PageProps){
      const allowedPageSizes = [4,8,16,24,32,48];
      const requestedPageSize = Number(params.pageSize);
      const pageSize = allowedPageSizes.includes(requestedPageSize) ? requestedPageSize : 8;
-     const category = params.category && Object.hasOwn(EXPERIMENT_FILTER_NAMES, params.category) ? params.category as ExperimentFilterName : undefined
+     const category = params.category && EXPERIMENT_FILTER_NAMES.includes(params.category) ? params.category as ExperimentFilterName : undefined
      const query = params.query?.trim().toLowerCase() ?? ""
      const searchResults = result.filter(item =>!query || item.title.toLowerCase().includes(query))
      const filteredExperiments = searchResults.filter(item =>
@@ -65,13 +64,10 @@ export default async function ExperimentsMainPage({ searchParams }: PageProps){
           (!params.selfGuided || item.selfGuided)
      )
      const categoryCounts = Object.fromEntries(
-          Object.keys(EXPERIMENT_FILTER_NAMES).map(key => {
-               const category = key as ExperimentFilterName
-               return [
-                    category,
-                    searchResults.filter(item =>item.categories.includes(category)).length
-               ]
-          })
+          EXPERIMENT_FILTER_NAMES.map(category => [
+               category,
+               searchResults.filter(item =>item.categories.includes(category)).length
+          ])
      ) as Record<ExperimentFilterName, number>
      const sort: SortType = params.sort === "oldest" ? "oldest" : "newest"
      const sortedExperiments = [...filteredExperiments].sort((a, b) =>

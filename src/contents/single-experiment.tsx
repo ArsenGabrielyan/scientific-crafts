@@ -6,6 +6,7 @@ import MDXContent from "@/section/mdx-content";
 import ExperimentHeader from "@/components/single-experiment/header";
 import ExperimentSideInfo from "@/components/single-experiment/side-info";
 import ExperimentAccessibility from "@/components/single-experiment/accessibility";
+import { useTranslations } from "next-intl";
 
 interface SingleExperimentContentProps{
      experiment: Experiment,
@@ -13,6 +14,7 @@ interface SingleExperimentContentProps{
      slug: string
 }
 export default function SingleExperimentContent({experiment, related, slug}: SingleExperimentContentProps){
+     const t = useTranslations("experiments.single-experiment")
      return (
           <SiteLayout>
                <ExperimentHeader experiment={experiment}/>
@@ -27,13 +29,13 @@ export default function SingleExperimentContent({experiment, related, slug}: Sin
                          </div>
                          {related && related.length!==0 && (
                               <>
-                                   <h2 className="text-xl md:text-2xl lg:text-[27px] font-semibold border-b border-primary pb-1 mb-4 w-fit">Առնչվող փորձեր</h2>
+                                   <h2 className="text-xl md:text-2xl lg:text-[27px] font-semibold border-b border-primary pb-1 mb-4 w-fit">{t("related")}</h2>
                                    <ExperimentsList experiments={related}/>
                               </>
                          )}
                          {experiment.tags.length!==0 && (
                               <>
-                                   <h2 className="text-xl md:text-2xl lg:text-[27px] font-semibold border-b border-primary pb-1 mb-4 w-fit">Բանալի բառեր</h2>
+                                   <h2 className="text-xl md:text-2xl lg:text-[27px] font-semibold border-b border-primary pb-1 mb-4 w-fit">{t("keywords")}</h2>
                                    <div className="flex items-center gap-2 flex-wrap">
                                         {experiment.tags.map((tag,i)=>(
                                              <Badge key={`${tag.toLowerCase()}-${i+1}`}>{tag}</Badge>

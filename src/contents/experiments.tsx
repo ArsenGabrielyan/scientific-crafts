@@ -8,22 +8,22 @@ import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { DEFAULT_VALUE, DIFFICULTIES, DURATIONS, SORT_VALUES } from "@/lib/constants";
-import { EXPERIMENT_FILTER_NAMES, ExperimentFilterName } from "@/lib/constants/filters";
-import { SearchSchema } from "@/lib/schemas";
-import { SearchPageMode, SearchType, SortType } from "@/lib/types";
+import { GET_DEFAULT_VALUE, DIFFICULTIES, DURATIONS, GET_SORT_VALUES, EXPERIMENT_FILTER_NAMES } from "@/lib/constants";
+import { getSearchSchema } from "@/lib/schemas";
+import type { SearchPageMode, SearchType, SortType, ExperimentFilterName, ExperimentDifficulty, ExperimentDuration } from "@/lib/types";
 import type { ExperimentMetadata } from "@/lib/types/experiment";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FilterX, Search, ShieldCheck } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
 interface ExperimentsMainContentProps {
      initialQuery?: string
      initialCategory?: ExperimentFilterName
-     initialDifficulty?: keyof typeof DIFFICULTIES
-     initialDuration?: keyof typeof DURATIONS
+     initialDifficulty?: ExperimentDifficulty
+     initialDuration?: ExperimentDuration
      initialSelfGuided?: boolean
      experiments: ExperimentMetadata[]
      pageSize: number
@@ -53,12 +53,13 @@ export default function ExperimentsMainContent({
      const pathname = usePathname()
      const [input, setInput] = useState(initialQuery ?? "")
      const [currFilter, setCurrFilter] = useState<"all" | ExperimentFilterName>(initialCategory ?? "all")
-     const [difficulty, setDifficulty] = useState<keyof typeof DIFFICULTIES | "">(initialDifficulty ?? "")
-     const [duration, setDuration] = useState<keyof typeof DURATIONS | "">(initialDuration ?? "")
+     const [difficulty, setDifficulty] = useState<ExperimentDifficulty | "">(initialDifficulty ?? "")
+     const [duration, setDuration] = useState<ExperimentDuration | "">(initialDuration ?? "")
      const [selfGuided, setSelfGuided] = useState(initialSelfGuided ?? false)
      const [sortType, setSortType] = useState<SortType>(initialSort ?? "newest");
+     const validationTxt = useTranslations("search.validation")
      const form = useForm<SearchType>({
-          resolver: zodResolver(SearchSchema),
+          resolver: zodResolver(getSearchSchema(validationTxt)),
           defaultValues: {
                query: initialQuery || ""
           },
@@ -103,7 +104,7 @@ export default function ExperimentsMainContent({
                scroll: false
           })
      }
-     function handleDifficulty(value: keyof typeof DIFFICULTIES | "") {
+     function handleDifficulty(value: ExperimentDifficulty | "") {
           setDifficulty(value)
           const params = new URLSearchParams(window.location.search)
           params.set("page", "1")
@@ -116,7 +117,7 @@ export default function ExperimentsMainContent({
                scroll: false
           })
      }
-     function handleDuration(value: keyof typeof DURATIONS | "") {
+     function handleDuration(value: ExperimentDuration | "") {
           setDuration(value)
           const params = new URLSearchParams(window.location.search)
           params.set("page", "1")
@@ -171,14 +172,21 @@ export default function ExperimentsMainContent({
                scroll: false
           })
      }
-     const isEmpty = input.trim() === "" && currFilter === "all" && !difficulty && !duration && !selfGuided
+     const isEmpty = input.trim() === "" && currFilter === "all" && !difficulty && !duration && !selfGuided;
+     const t = useTranslations("experiments");
+     const sortTxt = useTranslations("sort")
+     const searchTxt = useTranslations("search");
+     const btnTxt = useTranslations("buttons")
      return (
           <SiteLayout>
                <section className="w-full min-h-[64dvh] flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background px-4">
                     <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360 text-center md:text-left">
-                         <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold">Գիտական փորձեր</h1>
+                         <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold">{t("title")}</h1>
                          <p className="text-base md:text-lg text-muted-foreground">
-                              {mode==="search-page" ? "Այստեղ դուք կուսումնասիրեք և կկատարեք լիքը գիտական փորձեր։" : `«${initialQuery}» պիտակով նշված լավագույն ${totalResults} գիտական փորձեր`}
+                              {mode==="search-page" ? t("desc") : searchTxt("desc",{
+                                   query: initialQuery ?? "",
+                                   total: totalResults
+                              })}
                          </p>
                          {mode==="search-template" ? (
                               <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
@@ -189,7 +197,7 @@ export default function ExperimentsMainContent({
                                              render={({field})=>(
                                                   <SearchField
                                                        {...field}
-                                                       placeholder="Որոնել գիտական փորձեր..."
+                                                       placeholder={t("search")}
                                                        onClearSearch={()=>form.reset()}
                                                        groupClassName="bg-background/50"
                                                   />
@@ -197,21 +205,21 @@ export default function ExperimentsMainContent({
                                         />
                                         <Button type="submit" disabled={!form.formState.isValid || form.formState.isSubmitting}>
                                              <Search />
-                                             Որոնել
+                                             {btnTxt("search")}
                                         </Button>
                                    </ButtonGroup>
                               </form>
                          ) : (
                               <div className="flex items-center gap-2 w-full">
                                    <SearchField
-                                        placeholder="Որոնել"
+                                        placeholder={t("search")}
                                         value={input}
                                         onChange={e => handleSearch(e.target.value)}
                                         groupClassName="bg-background/50"
                                         excludeClearButton
                                    />
                                    {!isEmpty && (
-                                        <Button variant="destructive" size="icon" title="Մաքրել ֆիլտրները" onClick={handleClearFilters}>
+                                        <Button variant="destructive" size="icon" title={btnTxt("clear-filters")} onClick={handleClearFilters}>
                                              <FilterX/>
                                         </Button>
                                    )}
@@ -223,9 +231,11 @@ export default function ExperimentsMainContent({
                                    onClick={() => handleFilter("all")}
                                    className="flex-1"
                               >
-                                   Բոլորը ({allCount})
+                                   {t("all.with-count",{
+                                        total: allCount
+                                   })}
                               </Button>
-                              {Object.entries(EXPERIMENT_FILTER_NAMES).map(([key, value]) => {
+                              {EXPERIMENT_FILTER_NAMES.map(key => {
                                    const filter = key as ExperimentFilterName
                                    return (
                                         <Button
@@ -234,7 +244,7 @@ export default function ExperimentsMainContent({
                                              onClick={() => handleFilter(filter)}
                                              className="flex-1"
                                         >
-                                             {value} ({categoryCounts[filter]})
+                                             {t(`filters.${key}`)} ({categoryCounts[filter]})
                                         </Button>
                                    )
                               })}
@@ -246,35 +256,33 @@ export default function ExperimentsMainContent({
                          <div className="flex items-center justify-center md:justify-between flex-col md:flex-row gap-2 flex-wrap">
                               <div className="flex items-center gap-2 flex-wrap">
                                    <SelectorField
-                                        placeholder="Բարդություն"
+                                        placeholder={t("difficulties.title")}
                                         value={difficulty}
-                                        onChange={val=>handleDifficulty(val as keyof typeof DIFFICULTIES)}
+                                        onChange={val=>handleDifficulty(val as ExperimentDifficulty)}
                                         items={[
-                                             DEFAULT_VALUE,
-                                             ...Object.entries(DIFFICULTIES).map(([key,val])=>({
+                                             GET_DEFAULT_VALUE(t),
+                                             ...DIFFICULTIES.map(key=>({
                                                   value: key,
-                                                  label: val
+                                                  label: t(`difficulties.${key}`)
                                              }))
                                         ]}
                                    />
                                    <SelectorField
-                                        placeholder="Տևողություն"
+                                        placeholder={t("duration.title")}
                                         value={duration}
-                                        onChange={val=>handleDuration(val as keyof typeof DURATIONS)}
+                                        onChange={val=>handleDuration(val as ExperimentDuration)}
                                         items={[
-                                             DEFAULT_VALUE,
-                                             ...Object.entries(DURATIONS).map(([key,val])=>({
+                                             GET_DEFAULT_VALUE(t),
+                                             ...DURATIONS.map(key=>({
                                                   value: key,
-                                                  label: val
+                                                  label: t(`duration.${key}`)
                                              }))
                                         ]}
                                    />
                                    <div className="rounded-md shadow-xs border bg-background p-2 flex justify-between items-center dark:bg-input/30 dark:hover:bg-input/50 border-input aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 gap-4">
                                         <div className="flex items-center gap-2">
                                              <ShieldCheck className="text-emerald-500 dark:text-emerald-400 size-4.5"/> 
-                                             <Label htmlFor="self-guided">
-                                                  Միայն ինքնուրույն կատարվող
-                                             </Label>
+                                             <Label htmlFor="self-guided">{t("safety.title")}</Label>
                                         </div>
                                         <Switch
                                              id="self-guided"
@@ -284,10 +292,10 @@ export default function ExperimentsMainContent({
                                    </div>
                               </div>
                               <SelectorField
-                                   placeholder="Դասավորել գիտափորձերը"
+                                   placeholder={sortTxt("title.experiments")}
                                    value={sortType}
                                    onChange={value => handleSort(value as SortType)}
-                                   items={SORT_VALUES}
+                                   items={GET_SORT_VALUES(sortTxt)}
                                    className="max-w-xs"
                               />
                          </div>

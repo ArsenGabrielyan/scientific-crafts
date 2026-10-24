@@ -5,15 +5,17 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { ButtonGroup } from "./ui/button-group";
 import { useRouter } from "@/i18n/navigation";
 import SearchField from "./fields/search";
-import { SearchSchema } from "@/lib/schemas";
+import { getSearchSchema } from "@/lib/schemas";
 import type { SearchType } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
 export default function SearchPopup(){
      const router = useRouter();
+     const validationTxt = useTranslations("search.validation")
      const form = useForm<SearchType>({
-          resolver: zodResolver(SearchSchema),
+          resolver: zodResolver(getSearchSchema(validationTxt)),
           defaultValues: {
                query: ""
           },
@@ -23,10 +25,11 @@ export default function SearchPopup(){
           const params = new URLSearchParams({ query });
           router.push(`/experiments?${params.toString()}`);
      }
+     const t = useTranslations("buttons")
      return (
           <Popover>
                <PopoverTrigger asChild>
-                    <Button variant="outline" size="icon" title="Որոնել">
+                    <Button variant="outline" size="icon" title={t("search")}>
                          <Search/>
                     </Button>
                </PopoverTrigger>
@@ -39,7 +42,7 @@ export default function SearchPopup(){
                                    render={({field})=>(
                                         <SearchField
                                              {...field}
-                                             placeholder="Որոնել"
+                                             placeholder={t("search")}
                                              onClearSearch={()=>form.reset()}
                                         />
                                    )}

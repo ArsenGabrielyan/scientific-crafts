@@ -46,7 +46,7 @@ export const getExperimentBySlug = cache(async(slug: string): Promise<Experiment
                slug: frontmatter.slug ?? slug,
           };
      } catch (e) {
-          console.error(`Չստացվեց բեռնել ${slug} գիտափորձը`);
+          console.error(`Failed to get experiment: ${slug}`);
           console.error(e);
           return null;
      }

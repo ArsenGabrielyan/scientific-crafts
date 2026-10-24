@@ -1,9 +1,11 @@
 import { LucideIcon } from "lucide-react";
-import { TemplateFilterName } from "../constants/filters";
 import * as z from "zod"
-import { SearchSchema } from "../schemas"
+import { getSearchSchema } from "../schemas"
+import { DIFFICULTIES, DURATIONS, EXPERIMENT_FILTER_NAMES, TEMPLATE_FILTER_NAMES } from "../constants";
 
-export type SearchType = z.infer<typeof SearchSchema>
+export type SearchType = z.infer<
+     Awaited<ReturnType<typeof getSearchSchema>>
+>
 export interface SelectType{
      value: string,
      label: string | number,
@@ -39,3 +41,8 @@ export interface IHeaderLink{
      link: string,
      Icon: LucideIcon
 }
+
+export type TemplateFilterName = typeof TEMPLATE_FILTER_NAMES[number];
+export type ExperimentFilterName = typeof EXPERIMENT_FILTER_NAMES[number];
+export type ExperimentDuration = typeof DURATIONS[number];
+export type ExperimentDifficulty = typeof DIFFICULTIES[number]

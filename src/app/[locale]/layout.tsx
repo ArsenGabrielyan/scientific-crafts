@@ -4,7 +4,7 @@ import "../globals.css";
 import "katex/dist/katex.min.css"
 import { absoluteURL, cn, createMetaAlternates } from "@/lib/utils";
 import { ThemeProvider } from "@/components/themes/provider";
-import { KEYWORDS } from "@/lib/constants";
+import { KEYWORDS } from "@/lib/constants/keywords";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 

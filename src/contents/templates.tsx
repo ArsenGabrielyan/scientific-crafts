@@ -4,13 +4,13 @@ import PaginationWithLinks from "@/components/pagination-with-links"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import SearchField from "@/components/fields/search"
-import type { SortType, Template } from "@/lib/types"
+import type { SortType, Template, TemplateFilterName } from "@/lib/types"
 import TemplatesList from "@/components/lists/templates"
-import { TEMPLATE_FILTER_NAMES, TemplateFilterName } from "@/lib/constants/filters"
 import { usePathname, useRouter } from "@/i18n/navigation"
 import { FilterX } from "lucide-react"
 import SelectorField from "@/components/fields/selector"
-import { SORT_VALUES } from "@/lib/constants"
+import { GET_SORT_VALUES, TEMPLATE_FILTER_NAMES } from "@/lib/constants"
+import { useTranslations } from "next-intl"
 
 interface TemplatesMainContentProps {
      templates: Template[]
@@ -90,27 +90,26 @@ export default function TemplatesMainContent({
                scroll: false
           })
      }
-     const isEmpty = input.trim() === "" && currFilter === "all"
+     const isEmpty = input.trim() === "" && currFilter === "all";
+     const sortTxt = useTranslations("sort");
+     const t = useTranslations("templates");
+     const btnTxt = useTranslations("buttons")
      return (
           <SiteLayout>
                <section className="w-full min-h-[60dvh] flex items-center justify-center bg-radial-[at_6%_4%] from-[#0069a8] via-background to-background px-4">
                     <div className="flex items-center justify-center flex-col gap-6 w-full max-w-360 text-center md:text-left">
-                         <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold">
-                              Շաբլոններ
-                         </h1>
-                         <p className="text-base md:text-lg text-muted-foreground">
-                              Հատուկ շաբլոններ՝ գիտափորձեր կատարելու համար
-                         </p>
+                         <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold">{t("title")}</h1>
+                         <p className="text-base md:text-lg text-muted-foreground">{t("desc")}</p>
                          <div className="flex items-center gap-2 w-full">
                               <SearchField
-                                   placeholder="Որոնել"
+                                   placeholder={t("search")}
                                    value={input}
                                    onChange={e => handleSearch(e.target.value)}
                                    groupClassName="bg-background/50"
                                    excludeClearButton
                               />
                               {!isEmpty && (
-                                   <Button variant="destructive" size="icon" title="Մաքրել ֆիլտրները" onClick={handleClearFilters}>
+                                   <Button variant="destructive" size="icon" title={btnTxt("clear-filters")} onClick={handleClearFilters}>
                                         <FilterX/>
                                    </Button>
                               )}
@@ -121,9 +120,9 @@ export default function TemplatesMainContent({
                                    onClick={() => handleFilter("all")}
                                    className="flex-1"
                               >
-                                   Բոլորը ({allCount})
+                                   {t("all",{ total: allCount })}
                               </Button>
-                              {Object.entries(TEMPLATE_FILTER_NAMES).map(([key, value]) => {
+                              {TEMPLATE_FILTER_NAMES.map(key => {
                                    const filter = key as TemplateFilterName
                                    return (
                                         <Button
@@ -132,7 +131,7 @@ export default function TemplatesMainContent({
                                              onClick={() => handleFilter(filter)}
                                              className="flex-1"
                                         >
-                                             {value} ({categoryCounts[filter]})
+                                             {t(`filters.${key}`)} ({categoryCounts[filter]})
                                         </Button>
                                    )
                               })}
@@ -142,10 +141,10 @@ export default function TemplatesMainContent({
                <section className="w-full py-4 px-8 flex justify-center items-center scroll-mt-10">
                     <div className="w-full max-w-360 space-y-4">
                          <SelectorField
-                              placeholder="Դասավորել գիտափորձերը"
+                              placeholder={sortTxt("title.templates")}
                               value={sortType}
                               onChange={value => handleSort(value as SortType)}
-                              items={SORT_VALUES}
+                              items={GET_SORT_VALUES(sortTxt)}
                          />
                          <TemplatesList templates={templates} />
                          <PaginationWithLinks

@@ -1,6 +1,6 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import SingleExperimentContent from "@/contents/single-experiment";
-import { KEYWORDS } from "@/lib/constants";
+import { KEYWORDS } from "@/lib/constants/keywords";
 import { getAllSlugs, getExperimentBySlug, getRelatedExperiments } from "@/lib/helpers/experiments";
 import { absoluteURL, createMetaAlternates } from "@/lib/utils";
 import { Metadata } from "next";

@@ -4,12 +4,14 @@ import Image from "next/image";
 import { Card, CardHeader, CardAction, CardTitle, CardDescription, CardFooter } from "../ui/card";
 import type { ExperimentMetadata } from "@/lib/types/experiment";
 import { Link } from "@/i18n/navigation";
-import { EXPERIMENT_FILTER_NAMES } from "@/lib/constants/filters";
+import { useTranslations } from "next-intl";
 
 interface ExperimentCardProps{
      data: ExperimentMetadata
 }
 export default function ExperimentCard({data}: ExperimentCardProps){
+     const btnTxt = useTranslations("buttons")
+     const t = useTranslations("experiments.filters")
      return (
           <Card className="relative mx-auto w-full max-w-sm pt-0">
                <Image
@@ -21,7 +23,7 @@ export default function ExperimentCard({data}: ExperimentCardProps){
                />
                <CardHeader>
                     <CardAction>
-                         <Badge variant="secondary">{EXPERIMENT_FILTER_NAMES[data.categories[0]]}</Badge>
+                         <Badge variant="secondary">{t(data.categories[0])}</Badge>
                     </CardAction>
                     <CardTitle>{data.title}</CardTitle>
                     <CardDescription className="line-clamp-4">{data.description}</CardDescription>
@@ -29,7 +31,7 @@ export default function ExperimentCard({data}: ExperimentCardProps){
                <CardFooter>
                     <Button className="w-full" asChild>
                          <Link href={`/experiments/${data.slug}`}>
-                              Իմանալ Ավելին
+                              {btnTxt("learn-more")}
                          </Link>
                     </Button>
                </CardFooter>
