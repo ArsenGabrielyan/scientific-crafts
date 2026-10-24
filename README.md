@@ -56,27 +56,6 @@ The project began in 2018 as a video series of science experiments, and is now e
 - [![Vercel][vercel-shield]][vercel-url]
 - [![React][react-shield]][react-url]
 
-### Planned Improvements
-- [X] I18N Support
-- [X] Sort by date (Newest / Oldest)
-  - Experiments page
-  - Templates page
-- [X] Clear filters button
-- [X] New Experiments
-  - [X] Transparent flame
-  - [X] Whoosh Effect
-  - [X] Straw Siphon
-  - [X] Spinning Illusion
-  - [X] Water Pepper Soap
-  - [X] Paper Helicopter
-  - [X] Match Coin
-  - [X] Self-inflating bag
-  - [X] Heavy smoke
-  - [X] Water Rises
-  - [X] Bottle Leak
-  - [X] Broken ruler
-  - [X] Hologram
-
 ## Versioning
 This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog][changelog-url] for details on each website version.
 
