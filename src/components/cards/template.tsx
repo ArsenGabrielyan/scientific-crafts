@@ -18,7 +18,7 @@ export default function TemplateCard({data}: TemplateCardProps){
      return (
           <Card className="relative mx-auto w-full max-w-sm pt-0">
                <Image
-                    src={absoluteCDN(data.thumbnail)}
+                    src={absoluteCDN(`/thumbnails/${locale}/${data.thumbnail}`)}
                     alt={data.slug}
                     className="aspect-retro-vertical w-full object-cover brightness-95"
                     width={1280}
@@ -38,7 +38,7 @@ export default function TemplateCard({data}: TemplateCardProps){
                </CardHeader>
                <CardFooter>
                     <Button className="w-full" asChild>
-                         <Link href={absoluteCDN(data.file)} download={data.slug}>
+                         <Link href={absoluteCDN(`/pdf/${locale}/${data.file}`)} download={data.slug}>
                               <Download/>
                               {btnTxt("download")}
                          </Link>
