@@ -7,19 +7,21 @@ export const languages = [
 ] as const satisfies readonly ILanguage[];
 
 export const messages = [
-     "main"
+     "main",
+     "content"
 ] as const
 
 export const locales: LangCodeType[] = languages.map(lang=>lang.code);
 export const defaultLocale: LangCodeType = "hy";
 
 export async function loadMessages(locale: LangCodeType): Promise<MessageSchema>{
-     const [main] = await Promise.all(
+     const [main, content] = await Promise.all(
           messages.map(msg=>
                import(`../../i18n/${locale}/${msg}.json`).then(m=>m.default)
           )
      );
      return {
-          ...main
+          ...main,
+          ...content
      }
 }

@@ -21,57 +21,6 @@
     "search": "Search",
     "watch-playlist": "Watch the platlist"
   },
-  "experiments": {
-    "all": {
-      "original": "All",
-      "with-count": "All ({total, number})"
-    },
-    "breadcrumb": {
-      "experiments": "Science Experiments",
-      "main": "Home"
-    },
-    "desc": "Here you'll discover more science experiments",
-    "difficulties": {
-      "intermediate": "Intermediate",
-      "master": "Master",
-      "starter": "Starter",
-      "title": "Difficulty"
-    },
-    "duration": {
-      "long": "1h+",
-      "medium": "15-30m",
-      "short": "<15m",
-      "title": "Duration"
-    },
-    "empty": {
-      "desc": "At this moment, the experiments have not yet been published.",
-      "title": "No experiments found"
-    },
-    "filters": {
-      "chemistry": "Chemistry",
-      "physics": "Physics"
-    },
-    "safety": {
-      "adult-supervision": "Adult supervision is mandatory.",
-      "self-guided": "It can be performed independently",
-      "title": "Self guided only"
-    },
-    "search": "Search for experiments...",
-    "share": {
-      "error": "Failed to share the experiment",
-      "success": "Experiment successfully shared",
-      "title": "Share this experiment"
-    },
-    "side-info": {
-      "requirements": "You'll need",
-      "watch-video": "Watch the video {title}"
-    },
-    "single-experiment": {
-      "keywords": "Keywords",
-      "related": "Related Experiments"
-    },
-    "title": "Science Experiments"
-  },
   "footer": {
     "all-rights-reserved": "All rights reserved",
     "github": "View on GitHub",
@@ -98,14 +47,6 @@
     },
     "prev": "Previous"
   },
-  "search": {
-    "desc": "Explore the {total, number} scientific experiments tagged with “{query}”",
-    "title": "The best {total, number} scientific experiments tagged \"{query}\" – Updated {year, number}",
-    "validation": {
-      "too-long": "The query is too short",
-      "too-short": "The query is too long"
-    }
-  },
   "site": {
     "author": "Arsen G.",
     "desc": "Learn more about science, physics, chemistry, and STEM (science, technology, engineering, math) by testing lots of science experiments.",
@@ -124,23 +65,5 @@
       "experiments": "Sort experiments",
       "templates": "Sort templates"
     }
-  },
-  "templates": {
-    "all": "All ({total, number})",
-    "desc": "Special templates for doing science experiments",
-    "empty": {
-      "desc": "At this moment, the templates have not yet been published.",
-      "title": "No templates found"
-    },
-    "filters": {
-      "aerodynamics": "Aerodynamics",
-      "fluid-mechanics": "Fluid mechanics",
-      "optical-illusion": "Optical illusion",
-      "physics": "Physics",
-      "surface-chemistry": "Surface Chemistry"
-    },
-    "page": "{count, plural, one {# page} other {# pages}}",
-    "search": "Search templates...",
-    "title": "Templates"
   }
 }

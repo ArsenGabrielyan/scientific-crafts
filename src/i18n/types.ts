@@ -1,4 +1,5 @@
 import hyMain from "@i18n/hy/main.json"
+import hyContent from "@i18n/hy/content.json"
 
 import { NamespaceKeys, NestedKeyOf, useTranslations } from "next-intl";
 
@@ -10,7 +11,8 @@ export interface ILanguage{
      label: string
 }
 export type MessageSchema = (
-     typeof hyMain
+     typeof hyMain &
+     typeof hyContent
 )
 
 type TranslationNS = NamespaceKeys<MessageSchema,NestedKeyOf<MessageSchema>>
