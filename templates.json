@@ -6,8 +6,8 @@
                "en": "Hologram",
                "ru": "Голограмма"
           },
-          "file": "/pdf/hologram.pdf",
-          "thumbnail": "/thumbnails/hologram.webp",
+          "file": "hologram.pdf",
+          "thumbnail": "hologram.webp",
           "categories": ["physics", "optical-illusion"],
           "pages": 1,
           "date": "2026-09-07"
@@ -17,10 +17,10 @@
           "title": {
                "hy": "Պտտվող պատրանքներ",
                "en": "Spinning illusions",
-               "ru": "Вращающиеся иллюзии"
+               "ru": "Вращающаяся иллюзия"
           },
-          "file": "/pdf/spinning-illusion.pdf",
-          "thumbnail": "/thumbnails/spinning-illusion.webp",
+          "file": "spinning-illusion.pdf",
+          "thumbnail": "spinning-illusion.webp",
           "categories": ["physics", "optical-illusion"],
           "pages": 3,
           "date": "2026-09-07"
@@ -30,10 +30,10 @@
           "title": {
                "hy": "Թղթե ուղղաթիռ",
                "en": "Paper helicopter",
-               "ru": "Бумажный вертолётик"
+               "ru": "Бумажный вертолёт"
           },
-          "file": "/pdf/paper-helicopter.pdf",
-          "thumbnail": "/thumbnails/paper-helicopter.webp",
+          "file": "paper-helicopter.pdf",
+          "thumbnail": "paper-helicopter.webp",
           "categories": ["physics", "aerodynamics"],
           "pages": 1,
           "date": "2026-09-07"
@@ -45,8 +45,8 @@
                "en": "Paper soap-powered boat",
                "ru": "Бумажный кораблик, движимый мылом"
           },
-          "file": "/pdf/soap-boat.pdf",
-          "thumbnail": "/thumbnails/soap-boat.webp",
+          "file": "soap-boat.pdf",
+          "thumbnail": "soap-boat.webp",
           "categories": ["fluid-mechanics","surface-chemistry"],
           "pages": 1,
           "date": "2026-09-07"
@@ -58,8 +58,8 @@
                "en": "Blooming flowers",
                "ru": "Цветущие цветы"
           },
-          "file": "/pdf/flowers.pdf",
-          "thumbnail": "/thumbnails/flowers.webp",
+          "file": "flowers.pdf",
+          "thumbnail": "flowers.webp",
           "categories": ["physics"],
           "pages": 1,
           "date": "2026-09-15"
